@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start --open 'index.html' --server --files 'css/*.css, **/*.html, **/*.js'",
+    "start": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/ignasposka/pcacademy/issues"
   },
-  "homepage": "https://github.com/ignasposka/pcacademy#readme"
+  "homepage": "https://github.com/ignasposka/pcacademy#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
 }
