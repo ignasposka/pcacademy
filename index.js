@@ -14,5 +14,5 @@ const maxRows = 7;
     }
 
     const textarea = document.getElementsByTagName('textarea')[0];
-    textarea.addEventListener('keyup', resize);
+    textarea.addEventListener('keypress', resize);
 })()
