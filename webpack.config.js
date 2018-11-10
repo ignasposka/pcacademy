@@ -1,7 +1,7 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-    entry: './index.js',
+    entry: './public/index.js',
     mode: 'development',
     output: {
       path: __dirname + '/public',
@@ -27,7 +27,8 @@ module.exports = {
           port: 3000,
           server: { baseDir: ['public'] },
           files: [
-            'public/*'
+            'public/*',
+            'public/*.css'
         ]
         })
       ]
