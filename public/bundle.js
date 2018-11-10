@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var minRows = 5;\nvar maxRows = 7;\n\n//# sourceURL=webpack:///./index.js?");
+eval("var minRows = 5;\nvar maxRows = 7;\n\n(function () {\n  var resize = function resize() {\n    var textarea = document.getElementsByTagName('textarea')[0];\n    var diff = textarea.scrollHeight - textarea.clientHeight;\n\n    if (diff > 0) {\n      document.documentElement.style.setProperty('--row-count', \"\".concat(textarea.scrollHeight, \"px\"));\n    }\n  };\n\n  var textarea = document.getElementsByTagName('textarea')[0];\n  textarea.addEventListener('keyup', resize);\n})();\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ })
 
