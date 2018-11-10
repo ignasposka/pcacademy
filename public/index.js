@@ -20,6 +20,5 @@ import pxToEm from 'px-to-em';
     }
 
     document.documentElement.style.setProperty('--row-count', `${minRows}em`);
-    textarea.addEventListener('paste', resize);
     textarea.addEventListener('keyup', resize);
 })()
