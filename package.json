@@ -26,5 +26,8 @@
     "eslint": "^5.9.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "px-to-em": "^1.0.1"
   }
 }
