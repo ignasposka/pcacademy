@@ -1,0 +1,8 @@
+:root {
+    --row-count: 5em;
+  }
+
+textarea {
+    resize: none;
+    height: var(--row-count);
+ }

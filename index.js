@@ -1,1 +1,2 @@
-const hi = () => {console.log('hi')};
+const minRows = 5;
+const maxRows = 7;

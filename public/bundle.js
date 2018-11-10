@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var hi = function hi() {\n  console.log('hi');\n};\n\n//# sourceURL=webpack:///./index.js?");
+eval("var minRows = 5;\nvar maxRows = 7;\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ })
 
