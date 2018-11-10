@@ -4,6 +4,7 @@ module.exports = {
     entry: './index.js',
     mode: 'development',
     output: {
+      path: __dirname + '/public',
       filename: 'bundle.js'
     },
     module: {
@@ -26,11 +27,7 @@ module.exports = {
           port: 3000,
           server: { baseDir: ['public'] },
           files: [
-            'app/**/*',
-            'public/**/*',
-            'resources/views/**/*',
-            'resources/lang/**/*',
-            'routes/**/*'
+            'public/*'
         ]
         })
       ]
