@@ -8,12 +8,24 @@
 </head>
 
 <body>
-        <div class="top-bar">
-                <button class="button red">Greitoji paskola</button>
-                <button class="button">Būsto paskola</button>
-                <button class="button">Vartojimo paskola</button>
-              </div>
+  <div class="top-bar">
+    <button class="button red">Greitoji paskola</button>
+    <button class="button">Būsto paskola</button>
+    <button class="button">Vartojimo paskola</button>
+  </div>
+  <div>
+    <form>
+      <label>Paskolos dydis (€)</label>
+      <input type="number" max="5000">
+      <label>Terminas (mėn)</label>
+      <input type="number" max="24">
+      <div class="button-wrapper">
+      <input type="submit" value="Skaičiuoti">
+    </div>
+    </form>
+  </div>
 
   <script src="../dist/bundle.js"></script>
 </body>
+
 </html>
