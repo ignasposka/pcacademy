@@ -14,11 +14,38 @@
     <button class="button">Vartojimo paskola</button>
   </div>
   <div>
-    <form>
+    <form id="fast-credit">
       <label>Paskolos dydis (€)</label>
       <input type="number" max="5000">
       <label>Terminas (mėn)</label>
       <input type="number" max="24">
+      <div class="button-wrapper">
+      <input type="submit" value="Skaičiuoti">
+    </div>
+    </form>
+    <form id="accomodation-loan" class="hidden">
+      <label>Paskolos dydis (€)</label>
+      <input type="number" max="5000">
+      <label>Terminas (mėn)</label>
+      <input type="number" max="360">
+      <label>Mėnesinis atlygnimas (€)</label>
+      <input type="number">
+      <label>Vaikų skaičius</label>
+      <input type="number" min="0" step="1">
+      <div class="button-wrapper">
+      <input type="submit" value="Skaičiuoti">
+    </div>
+    </form>
+    <form id="consume-loan" class="hidden">
+      <label>Paskolos dydis (€)</label>
+      <input type="number" max="10000">
+      <label>Terminas (mėn)</label>
+      <input type="number" max="180">
+      <label>Išlaidų tipas</label>
+      <select>
+        <option value="car">Automobilis</option>
+        <option value="accomodation-reconstruction">Buto remontas</option>
+      </select>
       <div class="button-wrapper">
       <input type="submit" value="Skaičiuoti">
     </div>
