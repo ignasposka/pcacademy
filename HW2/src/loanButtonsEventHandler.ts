@@ -16,20 +16,22 @@ export default class LoanButtonsEventHandler {
     public fastCreditBtnOnClick(): void {
         this.fastCreditCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.fastCreditCalcModule);
-        
+        this.setCurrentButton('fast-credit-btn')
     }
     public accomodationLoanBtnOnClick(): void {
         this.accomodationLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.accomodationLoanCalcModule);
+        this.setCurrentButton('accomodation-loan-btn')
     }
     public consumeLoanBtnOnClick(): void {
         this.consumeLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.consumeLoanCalcModule);
+        this.setCurrentButton('consume-loan-btn')
     }
     private hideModulesExcept(moduleToExcept: Element): void {
         const modules = this.getAllModules();
         modules.forEach(element => {
-            if(element != moduleToExcept) {
+            if (element !== moduleToExcept) {
                 element.classList.add('hidden')
             }
         });
@@ -39,5 +41,17 @@ export default class LoanButtonsEventHandler {
         modules.push(this.fastCreditCalcModule,
             this.accomodationLoanCalcModule, this.consumeLoanCalcModule)
         return modules;
+    }
+
+    private setCurrentButton(currentButtonId: string): void {
+        const buttons = Array.from(document.getElementsByClassName('button'));
+        buttons.forEach(button => {
+            if(button.id === currentButtonId){
+                button.classList.add('red');
+            }
+            else {
+                button.classList.remove('red');
+            }
+        })
     }
 }
