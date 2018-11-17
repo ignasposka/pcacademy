@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Homework #2</title>
@@ -13,15 +14,15 @@
     <button id="accomodation-loan-btn" class="button">Būsto paskola</button>
     <button id="consume-loan-btn" class="button">Vartojimo paskola</button>
   </div>
-  <div>
+  <div id="loan-calc-container">
     <form id="fast-credit">
       <label>Paskolos dydis (€)</label>
       <input type="number" max="5000">
       <label>Terminas (mėn)</label>
       <input type="number" max="24">
       <div class="button-wrapper">
-      <input type="submit" value="Skaičiuoti">
-    </div>
+        <input type="submit" value="Skaičiuoti">
+      </div>
     </form>
     <form id="accomodation-loan" class="hidden">
       <label>Paskolos dydis (€)</label>
@@ -33,8 +34,8 @@
       <label>Vaikų skaičius</label>
       <input type="number" min="0" step="1">
       <div class="button-wrapper">
-      <input type="submit" value="Skaičiuoti">
-    </div>
+        <input type="submit" value="Skaičiuoti">
+      </div>
     </form>
     <form id="consume-loan" class="hidden">
       <label>Paskolos dydis (€)</label>
@@ -47,9 +48,14 @@
         <option value="accomodation-reconstruction">Buto remontas</option>
       </select>
       <div class="button-wrapper">
-      <input type="submit" value="Skaičiuoti">
-    </div>
+        <input type="submit" value="Skaičiuoti">
+      </div>
     </form>
+  </div>
+  <div class="container">
+    <h3>Rezultatai</h3>
+    <label>Mėnėsio įmoka:</label>
+      <input type="number" disabled>
   </div>
 
   <script src="bundle.js"></script>

@@ -58,15 +58,16 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div > form {
+div > form, .container {
     background-color: #f2f2f2;
     padding: 20px;
     margin-top: 20px;
     display: inline-block;
     width: 400px;
+    vertical-align: top;
 }
 
-form > * {
+form > *, .container > * {
 width: 100%;
 display: inline-block;
 }
@@ -78,4 +79,9 @@ display: inline-block;
 
 .hidden {
     display: none;
+}
+
+#loan-calc-container {
+    display: inline;
+    margin-right: 20px;
 }
