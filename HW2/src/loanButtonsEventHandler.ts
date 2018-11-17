@@ -38,7 +38,7 @@ export default class LoanButtonsEventHandler {
         });
     }
     private getAllModules(): Element[] {
-        const modules: Element = [];
+        const modules: Element[] = [];
         modules.push(this.fastCreditCalcModule,
             this.accomodationLoanCalcModule, this.consumeLoanCalcModule)
         return modules;

@@ -1,36 +1,43 @@
-const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: "development",
   entry: './src/index.ts',
+  mode: 'development',
+  output: {
+    path: __dirname + '/src',
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-typescript']
+          }
+        }
       }
     ]
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js']
-  },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'src')
   },
   plugins: [
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      server: ['src', 'dist'],
+      server: { baseDir: ['src'] },
       files: [
-        './src/*.html',
-        './src/*.css',
-        './dist/bundle.js'
+        'src/*.js',
+        'src/*.css'
       ]
-    })
+    }),
+    new Dotenv()
   ],
-  target: 'node'
+  node: {
+    fs: 'empty'
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.json']
+  }
 };
