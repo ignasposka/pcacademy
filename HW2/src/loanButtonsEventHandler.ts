@@ -28,6 +28,7 @@ export default class LoanButtonsEventHandler {
         this.hideModulesExcept(this.consumeLoanCalcModule);
         this.setCurrentButton('consume-loan-btn')
     }
+    
     private hideModulesExcept(moduleToExcept: Element): void {
         const modules = this.getAllModules();
         modules.forEach(element => {
@@ -37,7 +38,7 @@ export default class LoanButtonsEventHandler {
         });
     }
     private getAllModules(): Element[] {
-        const modules = [];
+        const modules: Element = [];
         modules.push(this.fastCreditCalcModule,
             this.accomodationLoanCalcModule, this.consumeLoanCalcModule)
         return modules;
@@ -46,7 +47,7 @@ export default class LoanButtonsEventHandler {
     private setCurrentButton(currentButtonId: string): void {
         const buttons = Array.from(document.getElementsByClassName('button'));
         buttons.forEach(button => {
-            if(button.id === currentButtonId){
+            if (button.id === currentButtonId) {
                 button.classList.add('red');
             }
             else {
