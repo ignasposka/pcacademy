@@ -14,7 +14,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: ['.tsx', '.ts', '.js']
   },
   output: {
     filename: 'bundle.js',
@@ -24,11 +24,12 @@ module.exports = {
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      server: { baseDir: ['src'] },
+      server: ['src', 'dist'],
       files: [
         './src/*.html',
-        './src/*.css'
-    ]
+        './src/*.css',
+        './dist/bundle.js'
+      ]
     })
   ]
 };
