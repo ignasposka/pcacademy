@@ -16,19 +16,22 @@ export default class LoanButtonsEventHandler {
     public fastCreditBtnOnClick(): void {
         this.fastCreditCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.fastCreditCalcModule);
-        this.setCurrentButton('fast-credit-btn')
+        this.setCurrentButton('fast-credit-btn');
+        this.setCurrentMaxAmount('Fast Credit');
     }
     public accomodationLoanBtnOnClick(): void {
         this.accomodationLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.accomodationLoanCalcModule);
-        this.setCurrentButton('accomodation-loan-btn')
+        this.setCurrentButton('accomodation-loan-btn');
+        this.setCurrentMaxAmount('Accomodation Loan');
     }
     public consumeLoanBtnOnClick(): void {
         this.consumeLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.consumeLoanCalcModule);
-        this.setCurrentButton('consume-loan-btn')
+        this.setCurrentButton('consume-loan-btn');
+        this.setCurrentMaxAmount('Consume Loan');
     }
-    
+
     private hideModulesExcept(moduleToExcept: Element): void {
         const modules = this.getAllModules();
         modules.forEach(element => {
@@ -54,5 +57,21 @@ export default class LoanButtonsEventHandler {
                 button.classList.remove('red');
             }
         })
+    }
+
+    private setCurrentMaxAmount(visibleModule: string): void {
+        const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
+
+        switch (visibleModule) {
+            case 'Fast Credit':
+                maxLoanInput.value = process.env.MAX_FAST_CREDIT_AMOUNT;
+                break;
+            case 'Accomodation Loan':
+                maxLoanInput.value = '';
+                break;
+            case 'Consume Loan':
+                maxLoanInput.value = process.env.MAX_CONSUME_LOAN_AMOUNT;
+                break;
+        }
     }
 }
