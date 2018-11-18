@@ -17,11 +17,11 @@
   <div id="loan-calc-container">
     <form id="fast-credit">
       <label>Paskolos dydis (€)</label>
-      <input type="number" max="5000">
+      <input id="fast-credit-amount" type="number" max="5000">
       <label>Terminas (mėn)</label>
-      <input type="number" max="24">
+      <input id="fast-credit-time" type="number" max="24">
       <div class="button-wrapper">
-        <input type="submit" value="Skaičiuoti">
+        <input id="calc-fast-credit-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="accomodation-loan" class="hidden">
@@ -34,7 +34,7 @@
       <label>Vaikų skaičius</label>
       <input type="number" min="0" step="1">
       <div class="button-wrapper">
-        <input type="submit" value="Skaičiuoti">
+        <input id="calc-accomodation-loan-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="consume-loan" class="hidden">
@@ -48,14 +48,14 @@
         <option value="accomodation-reconstruction">Buto remontas</option>
       </select>
       <div class="button-wrapper">
-        <input type="submit" value="Skaičiuoti">
+        <input id="calc-consume-loan-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
   </div>
   <div class="container">
     <h3>Rezultatai</h3>
     <label>Mėnėsio įmoka:</label>
-      <input type="number" disabled>
+      <input id="result" type="number" disabled>
   </div>
 
   <script src="bundle.js"></script>

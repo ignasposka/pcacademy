@@ -1,7 +1,8 @@
 export default abstract class Loan {
 
-    private amount: number;
-    private timeInMonths: number;
+    protected amount: number;
+    protected timeInMonths: number;
+    protected interestRate: number;
 
     constructor(amount: number, timeInMonths: number){
         this.amount = amount;
