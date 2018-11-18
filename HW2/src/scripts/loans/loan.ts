@@ -10,5 +10,7 @@ export default abstract class Loan {
         this.interestRate = interestRate;
     }
 
-    public abstract calculateMontlyPayment(): number
+    public calculateMontlyPayment(): number {
+        return this.amount * (1 + this.interestRate) / this.timeInMonths;
+    }
 }

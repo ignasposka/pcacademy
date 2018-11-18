@@ -18,9 +18,12 @@ export default class Initializer {
     public static initSubmitButtons():void {
         const fastCreditSubmitBtn: Element = document.getElementById('calc-fast-credit-btn');
         const accomodationLoanSubmitBtn: Element = document.getElementById('calc-accomodation-loan-btn');
+        const consumeLoanSubmitBtn: Element = document.getElementById('calc-consume-loan-btn');
     
         fastCreditSubmitBtn.addEventListener('click', (e:Event) => Calculator.fastCreditMonthlyPaymentCalculation(e));
         accomodationLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.accomodationLoanCalculation(e));
+        consumeLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.consumeLoanCalculation(e));
+
     }
 
     public static setMaxFastCredit():void {
@@ -29,7 +32,7 @@ export default class Initializer {
 
     public static setMaxAmounts(): void {
         const fastCreditAmountInput = <HTMLInputElement>document.getElementById('fast-credit-amount')
-        const accomodationLoanAmountInput = <HTMLInputElement>document.getElementById('consume-loan-input')
+        const accomodationLoanAmountInput = <HTMLInputElement>document.getElementById('consume-loan-amount-input')
 
         fastCreditAmountInput.max = process.env.MAX_FAST_CREDIT_AMOUNT;
         accomodationLoanAmountInput.max = process.env.MAX_CONSUME_LOAN_AMOUNT;

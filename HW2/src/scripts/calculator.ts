@@ -1,5 +1,6 @@
 import FastCredit from './loans/fastCredit';
 import AccomodationLoan from './loans/accomodationLoan';
+import ConsumeLoan from './loans/consumeLoan';
 
 export default class Calculator {
 
@@ -41,6 +42,27 @@ export default class Calculator {
 
         const accomodationLoan = new AccomodationLoan(amount, timeInMonths, monthlySalary, childrenQuantity);
         const result = accomodationLoan.calculateMontlyPayment();
+        resultInput.value = result.toString();
+        amountResultInput.value = amount.toString();
+    }
+
+    public static consumeLoanCalculation(e:Event):void {
+        e.preventDefault();
+        const form = <HTMLFormElement>document.getElementById('consume-loan');
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const resultInput = (<HTMLInputElement>document.getElementById('result'));
+        const amountResultInput = (<HTMLInputElement>document.getElementById('amount-result'));
+
+        const amount = parseFloat((<HTMLInputElement>document.getElementById('consume-loan-amount-input')).value);
+        const timeInMonths = parseInt((<HTMLInputElement>document.getElementById('consume-loan-time')).value);
+        const purpose = (<HTMLSelectElement>document.getElementById('loan-purpose')).value
+
+        const consumeLoan = new ConsumeLoan(amount, timeInMonths, purpose);
+        const result = consumeLoan.calculateMontlyPayment();
         resultInput.value = result.toString();
         amountResultInput.value = amount.toString();
     }

@@ -15,10 +15,6 @@ export default class AccomodationLoan extends Loan {
         this.maxLoanAmount = this.monthlySalary * this.salaryCoef;
     }
 
-    public calculateMontlyPayment(): number {
-        return this.amount * (1 + this.interestRate) / this.timeInMonths;
-    }
-
     public static updateMaxLoanAmount(e: Event) {
         const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
         const loanAmountInput = <HTMLInputElement>document.getElementById('accomodation-loan-amount');
