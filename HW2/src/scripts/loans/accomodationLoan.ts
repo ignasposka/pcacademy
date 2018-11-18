@@ -16,7 +16,7 @@ export default class AccomodationLoan extends Loan {
     }
 
     public calculateMontlyPayment(): number {
-        return this.amount * this.interestRate;
+        return this.amount * (1 + this.interestRate) / this.timeInMonths;
     }
 
     public static updateMaxLoanAmount(e: Event) {
