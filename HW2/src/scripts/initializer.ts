@@ -1,6 +1,7 @@
 import LoanButtonsEventHandler from './loanButtonsEventHandler';
 import Calculator from './calculator';
 import FastCredit from './loans/fastCredit';
+import AccomodationLoan from './loans/accomodationLoan';
 
 export default class Initializer {
     public static initMenuButtons():void {
@@ -33,5 +34,11 @@ export default class Initializer {
         fastCreditAmountInput.max = process.env.MAX_FAST_CREDIT_AMOUNT;
         accomodationLoanAmountInput.max = process.env.MAX_CONSUME_LOAN_AMOUNT;
 
+    }
+
+    public static initLiveActions(): void {
+        const accomodationLoanMonthlySalaryInput = document.getElementById('accomodation-loan-salary')
+
+        accomodationLoanMonthlySalaryInput.addEventListener('input', AccomodationLoan.updateMaxLoanAmount);
     }
 }

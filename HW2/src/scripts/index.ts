@@ -7,4 +7,5 @@ window.onload = () => {
     Initializer.initSubmitButtons(); 
     Initializer.setMaxFastCredit();
     Initializer.setMaxAmounts();
+    Initializer.initLiveActions();
 };
