@@ -5,26 +5,28 @@ export default class AccomodationLoan extends Loan {
     monthlySalary: number
     childrenQuantity: number
     salaryCoef: number
+    maxLoanAmount:number
 
     constructor(amount: number, timeInMonths: number, monthlySalary: number, childrenQuantity: number) {
         super(amount, timeInMonths, parseFloat(process.env.ACCOMODATION_LOAN_INTEREST_RATE))
         this.monthlySalary = monthlySalary;
         this.childrenQuantity = childrenQuantity;
         this.salaryCoef = parseFloat(process.env.ACCOMODATION_LOAN_SALARY_COEF);
+        this.maxLoanAmount = this.monthlySalary * this.salaryCoef;
     }
 
     public calculateMontlyPayment(): number {
-        throw new Error("Method not implemented.");
-    }
-
-    public calculateMaxLoan(): number {
-        return this.monthlySalary * this.salaryCoef;
+        return this.amount * this.interestRate;
     }
 
     public static updateMaxLoanAmount(e: Event) {
         const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
+        const loanAmountInput = <HTMLInputElement>document.getElementById('accomodation-loan-amount');
+
         const salaryCoef = parseFloat(process.env.ACCOMODATION_LOAN_SALARY_COEF);
         const salary = parseFloat((<HTMLInputElement>e.target).value);
-        maxLoanInput.value = (salary * salaryCoef).toString();
+        const maxLoanAmount = salary * salaryCoef;
+        maxLoanInput.value = (maxLoanAmount).toString();
+        loanAmountInput.max = maxLoanAmount.toString();
     }
 }
