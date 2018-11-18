@@ -10,4 +10,9 @@ export default class FastCredit extends Loan {
         return this.amount * (1 + this.interestRate) / this.timeInMonths;
     }
 
+    public static setMaxFastCredit():void {
+        const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
+        maxLoanInput.value = process.env.MAX_FAST_CREDIT_AMOUNT;
+    }
+
 }

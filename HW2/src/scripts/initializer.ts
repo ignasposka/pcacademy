@@ -1,5 +1,6 @@
 import LoanButtonsEventHandler from './loanButtonsEventHandler';
 import Calculator from './calculator';
+import FastCredit from './loans/fastCredit';
 
 export default class Initializer {
     public static initMenuButtons():void {
@@ -21,4 +22,16 @@ export default class Initializer {
         accomodationLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.accomodationLoanCalculation(e));
     }
 
+    public static setMaxFastCredit():void {
+        FastCredit.setMaxFastCredit();
+    } 
+
+    public static setMaxAmounts(): void {
+        const fastCreditAmountInput = <HTMLInputElement>document.getElementById('fast-credit-amount')
+        const accomodationLoanAmountInput = <HTMLInputElement>document.getElementById('consume-loan-input')
+
+        fastCreditAmountInput.max = process.env.MAX_FAST_CREDIT_AMOUNT;
+        accomodationLoanAmountInput.max = process.env.MAX_CONSUME_LOAN_AMOUNT;
+
+    }
 }
