@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/scripts/index.ts',
   mode: 'development',
   output: {
-    path: __dirname + '/src',
+    path: __dirname + '/dist',
     filename: 'bundle.js'
   },
   module: {
@@ -26,7 +26,11 @@ module.exports = {
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      server: { baseDir: ['src'] },
+      server: { baseDir: ['src'],
+      routes: {
+        '/bundle.js': 'dist/bundle.js'
+      }
+    },
       files: [
         'src/*'
       ]
