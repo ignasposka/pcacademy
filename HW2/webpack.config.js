@@ -2,7 +2,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/scripts/index.ts',
   mode: 'development',
   output: {
     path: __dirname + '/src',

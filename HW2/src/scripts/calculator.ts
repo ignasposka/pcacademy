@@ -1,4 +1,4 @@
-import FastCredit from './fastCredit';
+import FastCredit from './loans/fastCredit';
 
 export default class Calculator {
 
