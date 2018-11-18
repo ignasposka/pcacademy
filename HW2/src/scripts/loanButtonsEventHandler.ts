@@ -18,18 +18,21 @@ export default class LoanButtonsEventHandler {
         this.hideModulesExcept(this.fastCreditCalcModule);
         this.setCurrentButton('fast-credit-btn');
         this.setCurrentMaxAmount('Fast Credit');
+        this.disableAccomodationLoanMaxAmountLabel();
     }
     public accomodationLoanBtnOnClick(): void {
         this.accomodationLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.accomodationLoanCalcModule);
         this.setCurrentButton('accomodation-loan-btn');
         this.setCurrentMaxAmount('Accomodation Loan');
+        this.enableAccomodationLoanMaxAmountLabel();
     }
     public consumeLoanBtnOnClick(): void {
         this.consumeLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.consumeLoanCalcModule);
         this.setCurrentButton('consume-loan-btn');
         this.setCurrentMaxAmount('Consume Loan');
+        this.disableAccomodationLoanMaxAmountLabel();
     }
 
     private hideModulesExcept(moduleToExcept: Element): void {
@@ -73,5 +76,21 @@ export default class LoanButtonsEventHandler {
                 maxLoanInput.value = process.env.MAX_CONSUME_LOAN_AMOUNT;
                 break;
         }
+    }
+
+    private enableAccomodationLoanMaxAmountLabel(){
+        const maxAccomodationLoanAmountLabel = document.getElementById('max-accomodation-loan-amount-label');
+        const maxLoanAmountInputLabel = document.getElementById('max-amount-label');
+
+        maxAccomodationLoanAmountLabel.classList.remove('hidden');
+        maxLoanAmountInputLabel.classList.add('hidden');
+    }
+
+    private disableAccomodationLoanMaxAmountLabel(){
+        const maxAccomodationLoanAmountLabel = document.getElementById('max-accomodation-loan-amount-label');
+        const maxLoanAmountInputLabel = document.getElementById('max-amount-label');
+
+        maxAccomodationLoanAmountLabel.classList.add('hidden');
+        maxLoanAmountInputLabel.classList.remove('hidden');
     }
 }
