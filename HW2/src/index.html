@@ -17,31 +17,31 @@
   <div id="loan-calc-container">
     <form id="fast-credit">
       <label>Paskolos dydis (€)</label>
-      <input id="fast-credit-amount" type="number" max="5000">
+      <input id="fast-credit-amount" type="number" max="5000" required>
       <label>Terminas (mėn)</label>
-      <input id="fast-credit-time" type="number" max="24">
+      <input id="fast-credit-time" type="number" max="24" required>
       <div class="button-wrapper">
         <input id="calc-fast-credit-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="accomodation-loan" class="hidden">
       <label>Paskolos dydis (€)</label>
-      <input type="number" max="5000">
+      <input id="accomodation-loan-amount" type="number" max="5000" required>
       <label>Terminas (mėn)</label>
-      <input type="number" max="360">
+      <input id="accomodation-loan-time" type="number" max="360" required>
       <label>Mėnesinis atlygnimas (€)</label>
-      <input type="number">
+      <input id="accomodation-loan-salary" type="number" required>
       <label>Vaikų skaičius</label>
-      <input type="number" min="0" step="1">
+      <input id="accomodation-loan-children-quantity" type="number" min="0" step="1" required>
       <div class="button-wrapper">
         <input id="calc-accomodation-loan-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="consume-loan" class="hidden">
       <label>Paskolos dydis (€)</label>
-      <input type="number" max="10000">
+      <input type="number" max="10000" required>
       <label>Terminas (mėn)</label>
-      <input type="number" max="180">
+      <input type="number" max="180" required>
       <label>Išlaidų tipas</label>
       <select>
         <option value="car">Automobilis</option>
@@ -54,6 +54,10 @@
   </div>
   <div class="container">
     <h3>Rezultatai</h3>
+    <label>Maksimalus paskolos dydis (€):</label>
+      <input id="max-amount-result" type="number" disabled>
+    <label>Paskolos dydis (€):</label>
+      <input id="amount-result" type="number" disabled>
     <label>Mėnėsio įmoka (€):</label>
       <input id="result" type="number" disabled>
   </div>

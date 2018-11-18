@@ -15,8 +15,10 @@ export default class Initializer {
     
     public static initSubmitButtons():void {
         const fastCreditSubmitBtn: Element = document.getElementById('calc-fast-credit-btn');
+        const accomodationLoanSubmitBtn: Element = document.getElementById('calc-accomodation-loan-btn');
     
-        fastCreditSubmitBtn.addEventListener('click', (e:Event) => Calculator.calculateFastCreditMonthlyPayment(e));
+        fastCreditSubmitBtn.addEventListener('click', (e:Event) => Calculator.fastCreditMonthlyPaymentCalculation(e));
+        accomodationLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.accomodationLoanCalculation(e));
     }
 
 }
