@@ -14,6 +14,7 @@ export default class LoanButtonsEventHandler {
         this.consumeLoanBtnOnClick = this.consumeLoanBtnOnClick.bind(this);
     }
     public fastCreditBtnOnClick(): void {
+        this.resetResults();
         this.fastCreditCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.fastCreditCalcModule);
         this.setCurrentButton('fast-credit-btn');
@@ -21,6 +22,7 @@ export default class LoanButtonsEventHandler {
         this.disableAccomodationLoanMaxAmountLabel();
     }
     public accomodationLoanBtnOnClick(): void {
+        this.resetResults();
         this.accomodationLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.accomodationLoanCalcModule);
         this.setCurrentButton('accomodation-loan-btn');
@@ -28,6 +30,7 @@ export default class LoanButtonsEventHandler {
         this.enableAccomodationLoanMaxAmountLabel();
     }
     public consumeLoanBtnOnClick(): void {
+        this.resetResults();
         this.consumeLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.consumeLoanCalcModule);
         this.setCurrentButton('consume-loan-btn');
@@ -92,5 +95,15 @@ export default class LoanButtonsEventHandler {
 
         maxAccomodationLoanAmountLabel.classList.add('hidden');
         maxLoanAmountInputLabel.classList.remove('hidden');
+    }
+
+    private resetResults() {
+        const resultsContainer = document.getElementById('results-container');
+        
+        Array.from(resultsContainer.children).forEach(element => {
+            if(element.tagName === 'INPUT'){
+                (<HTMLInputElement>element).value = '';
+            }
+        });
     }
 }

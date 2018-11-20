@@ -2,17 +2,9 @@ import Loan from "./loan";
 
 export default class AccomodationLoan extends Loan {
 
-    monthlySalary: number
-    childrenQuantity: number
-    salaryCoef: number
-    maxLoanAmount:number
 
-    constructor(amount: number, timeInMonths: number, monthlySalary: number, childrenQuantity: number) {
+    constructor(amount: number, timeInMonths: number) {
         super(amount, timeInMonths, parseFloat(process.env.ACCOMODATION_LOAN_INTEREST_RATE))
-        this.monthlySalary = monthlySalary;
-        this.childrenQuantity = childrenQuantity;
-        this.salaryCoef = parseFloat(process.env.ACCOMODATION_LOAN_SALARY_COEF);
-        this.maxLoanAmount = this.monthlySalary * this.salaryCoef;
     }
 
     public static updateMaxLoanAmount(e: Event) {

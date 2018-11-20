@@ -15,8 +15,10 @@ export default class Calculator {
         const resultInput = (<HTMLInputElement>document.getElementById('result'));
         const amountResultInput = (<HTMLInputElement>document.getElementById('amount-result'));
         
-        const amount = parseInt((<HTMLInputElement>document.getElementById('fast-credit-amount')).value);
-        const timeInMonths = parseInt((<HTMLInputElement>document.getElementById('fast-credit-time')).value);
+        const formElements = (<HTMLFormElement>document.getElementById('fast-credit')).elements;
+
+        const amount = formElements['amount'].value;
+        const timeInMonths = formElements['time'].value;
 
         const fastCredit = new FastCredit(amount, timeInMonths);
         const result = fastCredit.calculateMontlyPayment();
@@ -35,12 +37,12 @@ export default class Calculator {
         const resultInput = (<HTMLInputElement>document.getElementById('result'));
         const amountResultInput = (<HTMLInputElement>document.getElementById('amount-result'));
 
-        const amount = parseFloat((<HTMLInputElement>document.getElementById('accomodation-loan-amount')).value);
-        const timeInMonths = parseInt((<HTMLInputElement>document.getElementById('accomodation-loan-time')).value);
-        const monthlySalary = parseFloat((<HTMLInputElement>document.getElementById('accomodation-loan-salary')).value);
-        const childrenQuantity = parseInt((<HTMLInputElement>document.getElementById('accomodation-loan-children-quantity')).value);
+        const formElements = (<HTMLFormElement>document.getElementById('accomodation-loan')).elements;
 
-        const accomodationLoan = new AccomodationLoan(amount, timeInMonths, monthlySalary, childrenQuantity);
+        const amount = formElements['amount'].value;
+        const timeInMonths = formElements['time'].value;
+
+        const accomodationLoan = new AccomodationLoan(amount, timeInMonths);
         const result = accomodationLoan.calculateMontlyPayment();
         resultInput.value = result.toString();
         amountResultInput.value = amount.toString();
@@ -57,9 +59,12 @@ export default class Calculator {
         const resultInput = (<HTMLInputElement>document.getElementById('result'));
         const amountResultInput = (<HTMLInputElement>document.getElementById('amount-result'));
 
-        const amount = parseFloat((<HTMLInputElement>document.getElementById('consume-loan-amount-input')).value);
-        const timeInMonths = parseInt((<HTMLInputElement>document.getElementById('consume-loan-time')).value);
-        const purpose = (<HTMLSelectElement>document.getElementById('loan-purpose')).value
+        const formElements = (<HTMLFormElement>document.getElementById('consume-loan')).elements;
+
+
+        const amount = formElements['amount'].value;
+        const timeInMonths = formElements['time'].value;
+        const purpose = formElements['purpose'].selectedIndex;
 
         const consumeLoan = new ConsumeLoan(amount, timeInMonths, purpose);
         const result = consumeLoan.calculateMontlyPayment();

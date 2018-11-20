@@ -17,33 +17,33 @@
   <div id="loan-calc-container">
     <form id="fast-credit">
       <label>Paskolos dydis (€)</label>
-      <input id="fast-credit-amount" type="number" required>
+      <input id="fast-credit-amount" name="amount" type="number" min="0" required>
       <label>Terminas (mėn)</label>
-      <input id="fast-credit-time" type="number" max="24" required>
+      <input name="time" type="number" max="24" min="0" required>
       <div class="button-wrapper">
         <input id="calc-fast-credit-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="accomodation-loan" class="hidden">
-      <label>Paskolos dydis (€)</label>
-      <input id="accomodation-loan-amount" type="number" required>
-      <label>Terminas (mėn)</label>
-      <input id="accomodation-loan-time" type="number" max="360" required>
       <label>Mėnesinis atlygnimas (€)</label>
-      <input id="accomodation-loan-salary" type="number" required>
+      <input name="salary" id="accomodation-loan-salary" type="number" min="0" required>
+      <label>Paskolos dydis (€)</label>
+      <input id="accomodation-loan-amount" name="amount" type="number" min="0" required>
+      <label>Terminas (mėn)</label>
+      <input name="time" type="number" max="360" min="1" required>
       <label>Vaikų skaičius</label>
-      <input id="accomodation-loan-children-quantity" type="number" min="0" step="1" required>
+      <input name="children-quantity" type="number" min="0" step="1" required>
       <div class="button-wrapper">
         <input id="calc-accomodation-loan-btn" type="submit" value="Skaičiuoti">
       </div>
     </form>
     <form id="consume-loan" class="hidden">
       <label>Paskolos dydis (€)</label>
-      <input id="consume-loan-amount-input" type="number" required>
+      <input id="consume-loan-amount-input" name="amount" type="number" min="0" required>
       <label>Terminas (mėn)</label>
-      <input id="consume-loan-time" type="number" max="180" required>
+      <input name="time" type="number" max="180" min="0" required>
       <label>Išlaidų tipas</label>
-      <select id="loan-purpose">
+      <select name="purpose">
         <option value="car">Automobilis</option>
         <option value="accomodation-reconstruction">Būsto remontas</option>
         <option value="education">Išsilavinimas</option>
@@ -53,7 +53,7 @@
       </div>
     </form>
   </div>
-  <div class="container">
+  <div class="container" id="results-container">
     <h3>Rezultatai</h3>
     <label id="max-amount-label">Maksimalus paskolos dydis (€):</label>
     <label id="max-accomodation-loan-amount-label" class="hidden">Maksimalus paskolos dydis pagal atlygimimą (€):</label>
