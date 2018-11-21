@@ -13,8 +13,8 @@ export default class AccomodationLoan extends Loan {
 
         const salaryCoef = parseFloat(process.env.ACCOMODATION_LOAN_SALARY_COEF);
         const salary = parseFloat((<HTMLInputElement>e.target).value);
-        const maxLoanAmount = salary * salaryCoef;
-        maxLoanInput.value = (maxLoanAmount).toString();
+        const maxLoanAmount = (salary * salaryCoef).toFixed(2);
+        maxLoanInput.value = maxLoanAmount.toString();
         loanAmountInput.max = maxLoanAmount.toString();
     }
 }
