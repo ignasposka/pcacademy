@@ -45,7 +45,4 @@ class Monitor {
     }
 }
 
-module.exports.Monitor = Monitor;
-const monitor = new Monitor();
-
-setInterval(monitor.showResources, 500);
+module.exports = Monitor;
