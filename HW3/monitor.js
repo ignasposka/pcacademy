@@ -1,24 +1,51 @@
 const os = require('os');
 const osUtils = require('os-utils');
+const logUpdate = require('log-update');
 
-const showResources = () => {
-    printMemoryUsage();
-    printCpuUsage();
-};
+class Monitor {
 
-const coefToPercents = (coeficient) => {
-    return (coeficient * 100).toFixed(2);
-};
+    constructor(){
+        this.cpuUsage = '-';
+        this.memoryUsage = '-';
 
-const printCpuUsage = () => {
-    osUtils.cpuUsage((usage) => {
-        console.log(`CPU Usage: ${coefToPercents(usage)}%`);
-    });
-};
+        this.updateStats = this.updateStats.bind(this);
+        this.showResources = this.showResources.bind(this);
+    }
 
-const printMemoryUsage = () => {
-    const usedMemoryInPercents = coefToPercents(1 - (os.freemem() / os.totalmem()));
-    console.log(`Free memory: ${usedMemoryInPercents}%`);
+    showResources() {
+        this.printMemoryUsage();
+        this.printCpuUsage();
+    };
+
+    coefToPercents(coeficient) {
+        return (coeficient * 100).toFixed(2);
+    };
+
+    printCpuUsage () {
+        osUtils.cpuUsage((usage) => {
+            this.updateStats(this.coefToPercents(usage), this.memoryUsage);
+        });
+    };
+
+    printMemoryUsage() {
+        const usedMemoryInPercents = this.coefToPercents(1 - (os.freemem() / os.totalmem()));
+        this.updateStats(this.cpuUsage, usedMemoryInPercents);
+    }
+
+    updateStats (cpuUsage, memoryUsage) {
+        this.cpuUsage = cpuUsage;
+        this.memoryUsage = memoryUsage;
+
+        logUpdate(
+            `
+            ${`CPU usage: ${cpuUsage}%`}
+            ${`Memory usage: ${memoryUsage}%`}
+            `
+        )
+    }
 }
 
-setInterval(showResources, 500);
+module.exports.Monitor = Monitor;
+const monitor = new Monitor();
+
+setInterval(monitor.showResources, 500);
