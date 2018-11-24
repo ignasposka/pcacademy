@@ -1,4 +1,3 @@
-const Monitor = require('./monitor');
+const showResources = require('./monitor');
 
-const monitor = new Monitor();
-setInterval(monitor.showResources, 500);
+setInterval(showResources, 500);
