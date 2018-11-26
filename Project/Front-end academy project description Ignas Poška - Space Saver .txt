@@ -1,0 +1,11 @@
+﻿Space Saver - cloud platform to manage your visual content uploaded from Space Saver device (about Space saver device please read in additional document).
+
+
+Web user can use the platform only by signing in. After sign in, user can see all the photos and videos he have uploaded.
+
+
+CRUD operations are being applied for manipulating photos.
+
+
+Available endpoints:
+* /visualContent
