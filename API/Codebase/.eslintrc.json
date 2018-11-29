@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+        "arrow-parens": ["error", "always"],
+        "class-methods-use-this": "off",
+        "comma-dangle": ["error", "never"],
+        "consistent-return": "off",
+        "global-require": "off",
+        "indent": ["error", 4],
+        "no-shadow": "off",
+        "no-underscore-dangle": "off",
+        "no-unused-vars": "off",
+        "no-use-before-define": [2, "nofunc"],
+        "import/order": "off"
+    }
+}
