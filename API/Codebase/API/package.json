@@ -4,7 +4,7 @@
   "description": "Space Saver Project Web API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ignas Poška <ignasp789@gmail.com> (https://github.com/ignasposka)",
@@ -14,8 +14,9 @@
     "dotenv": "6.0.0"
   },
   "devDependencies": {
+    "eslint": "5.7.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.14.0",
-    "eslint": "5.7.0"
+    "nodemon": "^1.18.7"
   }
 }
