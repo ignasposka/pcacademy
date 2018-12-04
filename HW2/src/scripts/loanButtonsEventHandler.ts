@@ -1,3 +1,5 @@
+import { LoanType } from './loans/loanType';
+
 export default class LoanButtonsEventHandler {
 
     private fastCreditCalcModule: Element
@@ -14,24 +16,27 @@ export default class LoanButtonsEventHandler {
         this.consumeLoanBtnOnClick = this.consumeLoanBtnOnClick.bind(this);
     }
     public fastCreditBtnOnClick(): void {
+        this.resetResults();
         this.fastCreditCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.fastCreditCalcModule);
         this.setCurrentButton('fast-credit-btn');
-        this.setCurrentMaxAmount('Fast Credit');
+        this.setCurrentMaxAmount(LoanType.FastCredit);
         this.disableAccomodationLoanMaxAmountLabel();
     }
     public accomodationLoanBtnOnClick(): void {
+        this.resetResults();
         this.accomodationLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.accomodationLoanCalcModule);
         this.setCurrentButton('accomodation-loan-btn');
-        this.setCurrentMaxAmount('Accomodation Loan');
+        this.setCurrentMaxAmount(LoanType.AccomodationLoan);
         this.enableAccomodationLoanMaxAmountLabel();
     }
     public consumeLoanBtnOnClick(): void {
+        this.resetResults();
         this.consumeLoanCalcModule.classList.remove('hidden');
         this.hideModulesExcept(this.consumeLoanCalcModule);
         this.setCurrentButton('consume-loan-btn');
-        this.setCurrentMaxAmount('Consume Loan');
+        this.setCurrentMaxAmount(LoanType.ConsumeLoan);
         this.disableAccomodationLoanMaxAmountLabel();
     }
 
@@ -62,23 +67,23 @@ export default class LoanButtonsEventHandler {
         })
     }
 
-    private setCurrentMaxAmount(visibleModule: string): void {
+    private setCurrentMaxAmount(visibleModule: LoanType): void {
         const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
 
         switch (visibleModule) {
-            case 'Fast Credit':
+            case LoanType.FastCredit:
                 maxLoanInput.value = process.env.MAX_FAST_CREDIT_AMOUNT;
                 break;
-            case 'Accomodation Loan':
+            case LoanType.AccomodationLoan:
                 maxLoanInput.value = '';
                 break;
-            case 'Consume Loan':
+            case LoanType.ConsumeLoan:
                 maxLoanInput.value = process.env.MAX_CONSUME_LOAN_AMOUNT;
                 break;
         }
     }
 
-    private enableAccomodationLoanMaxAmountLabel(){
+    private enableAccomodationLoanMaxAmountLabel() {
         const maxAccomodationLoanAmountLabel = document.getElementById('max-accomodation-loan-amount-label');
         const maxLoanAmountInputLabel = document.getElementById('max-amount-label');
 
@@ -86,11 +91,21 @@ export default class LoanButtonsEventHandler {
         maxLoanAmountInputLabel.classList.add('hidden');
     }
 
-    private disableAccomodationLoanMaxAmountLabel(){
+    private disableAccomodationLoanMaxAmountLabel() {
         const maxAccomodationLoanAmountLabel = document.getElementById('max-accomodation-loan-amount-label');
         const maxLoanAmountInputLabel = document.getElementById('max-amount-label');
 
         maxAccomodationLoanAmountLabel.classList.add('hidden');
         maxLoanAmountInputLabel.classList.remove('hidden');
+    }
+
+    private resetResults() {
+        const resultsContainer = document.getElementById('results-container');
+
+        Array.from(resultsContainer.children).forEach(element => {
+            if (element.tagName === 'INPUT') {
+                (<HTMLInputElement>element).value = '';
+            }
+        });
     }
 }

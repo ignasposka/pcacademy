@@ -1,18 +1,19 @@
 import Loan from "./loan";
+import { ConsumeLoanType } from './consumeLoanType';
 
 export default class ConsumeLoan extends Loan {
 
-    constructor(amount: number, timeInMonths: number, purpose: string) {
+    constructor(amount: number, timeInMonths: number, purpose: ConsumeLoanType) {
         super(amount, timeInMonths, ConsumeLoan.getInterestRate(purpose))
     }
 
-    private static getInterestRate(purpose: string): number {
+    private static getInterestRate(purpose: ConsumeLoanType): number {
         switch (purpose) {
-            case 'car':
+            case ConsumeLoanType.Car:
                 return parseFloat(process.env.CAR_INTEREST_RATE);
-            case 'accomodation-reconstruction':
+            case ConsumeLoanType.AccomodationReconstruction:
                 return parseFloat(process.env.RECONSTRUCTION_INTEREST_RATE);
-            case 'education':
+            case ConsumeLoanType.Education:
                 return parseFloat(process.env.EDUCATION_INTEREST_RATE);
             default:
                 break;

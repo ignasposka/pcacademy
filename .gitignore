@@ -2,9 +2,10 @@ CL1/node_modules/*
 HW2/node_modules
 HW2/dist/bundle.js
 HW2/src/bundle.js
-API/Codebase/API/node_modules
-HW3/node_modules
-API/Vagrant/.vagrant
+CL4/node_modules
 CL2/node_modules
 CL3/node_modules
-CL4/node_modules
+HW3/node_modules
+API/Codebase/API/node_modules
+API/Vagrant/.vagrant
+

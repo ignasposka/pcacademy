@@ -10,5 +10,4 @@ export default class FastCredit extends Loan {
         const maxLoanInput = <HTMLInputElement>document.getElementById('max-amount-result');
         maxLoanInput.value = process.env.MAX_FAST_CREDIT_AMOUNT;
     }
-
 }

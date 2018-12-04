@@ -1,7 +1,9 @@
 import LoanButtonsEventHandler from './loanButtonsEventHandler';
-import Calculator from './calculator';
 import FastCredit from './loans/fastCredit';
 import AccomodationLoan from './loans/accomodationLoan';
+import FastCreditManager from './loanManager/fastCreditManager';
+import AccomodationLoanManager from './loanManager/accomodationLoanManager';
+import ConsumeLoanManager from './loanManager/consumeLoanManager';
 
 export default class Initializer {
     public static initMenuButtons():void {
@@ -19,10 +21,14 @@ export default class Initializer {
         const fastCreditSubmitBtn: Element = document.getElementById('calc-fast-credit-btn');
         const accomodationLoanSubmitBtn: Element = document.getElementById('calc-accomodation-loan-btn');
         const consumeLoanSubmitBtn: Element = document.getElementById('calc-consume-loan-btn');
+
+        const fastCreditManager = new FastCreditManager();
+        const accomodationLoanManager = new AccomodationLoanManager();
+        const consumeLoanManager = new ConsumeLoanManager();
     
-        fastCreditSubmitBtn.addEventListener('click', (e:Event) => Calculator.fastCreditMonthlyPaymentCalculation(e));
-        accomodationLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.accomodationLoanCalculation(e));
-        consumeLoanSubmitBtn.addEventListener('click', (e:Event) => Calculator.consumeLoanCalculation(e));
+        fastCreditSubmitBtn.addEventListener('click', (e:Event) => fastCreditManager.onSubmit(e));
+        accomodationLoanSubmitBtn.addEventListener('click', (e:Event) => accomodationLoanManager.onSubmit(e));
+        consumeLoanSubmitBtn.addEventListener('click', (e:Event) => consumeLoanManager.onSubmit(e));
 
     }
 
