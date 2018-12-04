@@ -5,13 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon --inspect index.js"
   },
   "author": "Ignas Poška <ignasp789@gmail.com> (https://github.com/ignasposka)",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "dotenv": "6.0.0"
+    "dotenv": "6.0.0",
+    "mongoose": "^5.3.13",
+    "body-parser": "^1.18.3",
+    "async": "2.6.1",
+    "debug": "4.0.1"
   },
   "devDependencies": {
     "eslint": "5.7.0",
