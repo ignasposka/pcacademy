@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "nodemon --inspect index.js"
+    "debug": "nodemon --inspect-brk index.js"
   },
   "author": "Ignas Poška <ignasp789@gmail.com> (https://github.com/ignasposka)",
   "license": "ISC",
