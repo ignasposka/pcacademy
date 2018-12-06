@@ -8,7 +8,7 @@ const AlbumSchema = new Schema({
     access: {
         type: [{
             collaborator: mongoose.Schema.Types.ObjectId,
-            rights: ['admin', 'write', 'read']
+            rights: { type: String, enum: ['admin', 'write', 'read'] }
         }],
         required: true
     }
