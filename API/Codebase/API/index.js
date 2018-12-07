@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const express = require('express');
-const debug = require('debug')('SpaceSaver');
 const bodyParser = require('body-parser');
 const connectToDb = require('./connectToDb');
 const handleError = require('./handleError');
