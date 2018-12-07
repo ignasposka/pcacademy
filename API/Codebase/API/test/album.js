@@ -42,7 +42,7 @@ describe('Albums', () => {
             })
             .end((err, res) => {
                 res.should.have.status(201);
-                res.body.should.contain.keys('name')
+                res.body.should.contain.keys('name', 'access', 'visualElements', '_id')
                 done();
             })
         })
