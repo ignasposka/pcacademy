@@ -3,7 +3,8 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHtpp = require('chai-http');
 const AlbumModel = require('../models/album');
-const app = require('../index.js');
+const apiUrl = 'http://localhost:8080';
+require('../index.js');
 
 chai.should();
 chai.use(chaiHtpp);
@@ -18,7 +19,7 @@ describe('Albums', () => {
 
     describe('/GET albums', () => {
         it('it should return albums', done => {
-            chai.request('http://localhost:8080')
+            chai.request(apiUrl)
                 .get('/albums')
                 .end((error, response)=> {
                     response.should.have.status(200);
@@ -27,5 +28,24 @@ describe('Albums', () => {
                 });
         });
     });
+
+    describe('/POST album', () => {
+        it('it should return created album', done => {
+            chai.request(apiUrl)
+            .post('/albums')
+            .send({
+                name: 'test',
+                access: {
+                    collaborator: '54759eb3c090d83494e2d804',
+                    rights: 'admin'
+                }
+            })
+            .end((err, res) => {
+                res.should.have.status(201);
+                res.body.should.contain.keys('name')
+                done();
+            })
+        })
+    })
 });
 
