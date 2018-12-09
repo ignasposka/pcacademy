@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "mocha --timeout 10000",
+    "test-debug": "mocha --debug-brk --inspect --timeout 10000",
     "debug": "nodemon --inspect-brk index.js"
   },
   "author": "Ignas Poška <ignasp789@gmail.com> (https://github.com/ignasposka)",
