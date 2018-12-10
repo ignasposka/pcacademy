@@ -12,5 +12,8 @@
         "no-unused-vars": "off",
         "no-use-before-define": [2, "nofunc"],
         "import/order": "off"
+    },
+    "env": {
+        "mocha": true
     }
 }
