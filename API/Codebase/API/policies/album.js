@@ -39,6 +39,7 @@ exports.patch = {
     visualElements: {
         in: ['body'],
         isArray: true,
+        optional: true,
         custom: {
             options: (arr) => arr.every((element) => typeof element === 'string')
         },
@@ -46,6 +47,7 @@ exports.patch = {
     },
     access: {
         in: ['body'],
+        optional: true,
         custom: {
             options: (obj) => typeof obj === 'object'
                 && obj.collaborator

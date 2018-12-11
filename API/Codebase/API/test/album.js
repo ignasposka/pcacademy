@@ -13,11 +13,6 @@ chai.should();
 chai.use(chaiHtpp);
 
 describe('Albums', () => {
-    beforeEach((done) => {
-        AlbumModel.deleteMany({}, (err) => {
-            done();
-        });
-    });
 
     describe('/GET albums', () => {
         it('it should return albums', (done) => {
@@ -56,14 +51,14 @@ describe('Albums', () => {
     describe('/PATCH album', () => {
         it('it should return no content', (done) => {
             chai.request(apiUrl)
-                .patch('/albums')
+                .patch('/albums/5c0fa93fb12acf2df4de0ab9')
                 .set('content-type', 'application/json')
                 .send({
                     name: 'patched!'
                 })
                 .end((err, res) => {
                     if (res.status !== 204) {
-                        mlog.error(res);
+                        console.log(res.body);
                     }
                     res.should.have.status(204);
                     done();

@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const connectToDb = require('./connectToDb');
 const handleError = require('./handleError');
-const albumsRoute = require('./routes/albums');
+const albumsRouter = require('./routes/albums');
 
 require('dotenv').config();
 
@@ -20,7 +20,7 @@ function initialize() {
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(albumsRoute);
+    app.use(albumsRouter);
     app.use(handleError);
 
     app.listen(process.env.API_PORT, () => {
