@@ -13,11 +13,13 @@ chai.should();
 chai.use(chaiHtpp);
 
 describe('Albums', () => {
+    let createdAlbumId;
+
     before((done) => {
         AlbumModel.deleteMany({}, (err) => {
             done();
         });
-    });    
+    });
 
     describe('/POST album', () => {
         it('it should return created album', (done) => {
@@ -33,6 +35,8 @@ describe('Albums', () => {
                 .end((err, res) => {
                     if (res.status !== 201) {
                         mlog.error(res.body);
+                    } else {
+                        createdAlbumId = res.body._id;
                     }
                     res.should.have.status(201);
                     res.body.should.contain.keys('name', 'access', 'visualElements', '_id');
@@ -66,6 +70,21 @@ describe('Albums', () => {
                 .end((error, response) => {
                     response.should.have.status(200);
                     response.body.should.be.a('array');
+                    done();
+                });
+        });
+    });
+
+    describe('/GET single album', () => {
+        it('it should return created album', (done) => {
+            chai.request(apiUrl)
+                .get(`/albums/${createdAlbumId}`)
+                .end((err, res) => {
+                    if (res.status !== 200) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(200);
+                    expect(res.body).to.have.property('_id').to.be.equal(createdAlbumId);
                     done();
                 });
         });

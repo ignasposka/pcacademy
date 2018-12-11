@@ -56,3 +56,13 @@ exports.patch = {
         }
     }
 };
+
+exports.get = {
+    _id: {
+        in: ['params'],
+        errorMessage: 'Album id is invalid',
+        custom: {
+            options: (id) => ObjectId.isValid(id)
+        }
+    }
+}

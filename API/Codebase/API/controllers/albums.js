@@ -1,7 +1,7 @@
 const Album = require('../models/album');
 const filter = require('express-validator/filter');
 
-exports.get = async (req, res) => {
+exports.get = (req, res, next) => {
     Album.find((err, albums) => {
         if (err) {
             next(err);
@@ -10,6 +10,21 @@ exports.get = async (req, res) => {
         }
     })
 };
+
+exports.getSingle = (req, res, next, validator) => {
+    const validationErrors = validator.validationResult(req);
+
+    if (validationErrors.isEmpty()) {
+        const requestData = filter.matchedData(req);
+        Album.findById(requestData._id, (err, album) => {
+            if (err) {
+                next(err);
+            } else {
+                res.status(200).send(album)
+            }
+        })
+    }
+}
 
 exports.create = (req, res, next) => {
     const album = new Album({
