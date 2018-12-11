@@ -13,18 +13,11 @@ chai.should();
 chai.use(chaiHtpp);
 
 describe('Albums', () => {
-
-    describe('/GET albums', () => {
-        it('it should return albums', (done) => {
-            chai.request(apiUrl)
-                .get('/albums')
-                .end((error, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.a('array');
-                    done();
-                });
+    before((done) => {
+        AlbumModel.deleteMany({}, (err) => {
+            done();
         });
-    });
+    });    
 
     describe('/POST album', () => {
         it('it should return created album', (done) => {
@@ -61,6 +54,18 @@ describe('Albums', () => {
                         console.log(res.body);
                     }
                     res.should.have.status(204);
+                    done();
+                });
+        });
+    });
+
+    describe('/GET albums', () => {
+        it('it should return albums', (done) => {
+            chai.request(apiUrl)
+                .get('/albums')
+                .end((error, response) => {
+                    response.should.have.status(200);
+                    response.body.should.be.a('array');
                     done();
                 });
         });

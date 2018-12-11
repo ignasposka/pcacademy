@@ -2,8 +2,13 @@ const Album = require('../models/album');
 const filter = require('express-validator/filter');
 
 exports.get = async (req, res) => {
-    const albums = await Album.find();
-    res.status(200).send(albums);
+    Album.find((err, albums) => {
+        if (err) {
+            next(err);
+        } else {
+            res.status(200).send(albums)
+        }
+    })
 };
 
 exports.create = (req, res, next) => {
