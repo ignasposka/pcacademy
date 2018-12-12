@@ -80,7 +80,5 @@ exports.delete = (req, res, next, validator) => {
             }
             res.status(204).send();
         });
-    } else {
-        res.status(400).send(validationErrors);
     }
 };
