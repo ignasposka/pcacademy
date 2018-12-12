@@ -17,8 +17,12 @@ router.route('/albums/:_id')
         (req, res, next) => albumsController.getSingle(req, res, next, validator)
     ])
     .patch([
-    validator.checkSchema(albumPolicy.patch),
-    (req, res, next) => albumsController.patch(req, res, next, validator)
-]);
+        validator.checkSchema(albumPolicy.patch),
+        (req, res, next) => albumsController.patch(req, res, next, validator)
+    ])
+    .delete([
+        validator.checkSchema(albumPolicy.delete),
+        (req, res, next) => albumsController.delete(req, res, next, validator)
+    ]);
 
 module.exports = router;

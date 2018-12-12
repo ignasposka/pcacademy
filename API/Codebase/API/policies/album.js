@@ -65,4 +65,14 @@ exports.get = {
             options: (id) => ObjectId.isValid(id)
         }
     }
-}
+};
+
+exports.delete = {
+    _id: {
+        in: ['params'],
+        errorMessage: 'Album id is invalid',
+        custom: {
+            options: (id) => ObjectId.isValid(id)
+        }
+    }
+};

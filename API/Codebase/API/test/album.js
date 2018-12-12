@@ -85,6 +85,21 @@ describe('Albums', () => {
                     }
                     res.should.have.status(200);
                     expect(res.body).to.have.property('_id').to.be.equal(createdAlbumId);
+                    expect(res.body).to.have.property('name').to.be.equal('patched!');
+                    done();
+                });
+        });
+    });
+
+    describe('/DELETE album', () => {
+        it('it should delete album, return 204', (done) => {
+            chai.request(apiUrl)
+                .delete(`/albums/${createdAlbumId}`)
+                .end((err, res) => {
+                    if (res.status !== 204) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(204);
                     done();
                 });
         });
