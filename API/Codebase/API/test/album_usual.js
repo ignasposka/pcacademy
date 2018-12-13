@@ -34,7 +34,7 @@ describe('Albums', () => {
                 })
                 .end((err, res) => {
                     if (res.status !== 201) {
-                        mlog.error(res.body);
+                        console.log(res.body);
                     } else {
                         createdAlbumId = res.body._id;
                     }

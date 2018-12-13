@@ -24,22 +24,32 @@ exports.getSingle = (req, res, next, validator) => {
                 res.status(200).send(album);
             }
         });
+    } else {
+        res.status(400).json({ errors: validationErrors.array() });
     }
 };
 
-exports.create = (req, res, next) => {
-    const album = new Album({
-        name: req.body.name,
-        access: req.body.access
-    });
+exports.create = (req, res, next, validator) => {
+    const validationErrors = validator.validationResult(req);
 
-    album.save((err, createdAlbum) => {
-        if (err) {
-            next(err);
-        } else {
-            res.status(201).send(createdAlbum);
-        }
-    });
+    if (validationErrors.isEmpty()) {
+        const requestData = filter.matchedData(req);
+
+        const album = new Album({
+            name: requestData.name,
+            access: requestData.access
+        });
+
+        album.save((err, createdAlbum) => {
+            if (err) {
+                next(err);
+            } else {
+                res.status(201).send(createdAlbum);
+            }
+        });
+    } else {
+        res.status(400).json({ errors: validationErrors.array() });
+    }
 };
 
 exports.patch = (req, res, next, validator) => {

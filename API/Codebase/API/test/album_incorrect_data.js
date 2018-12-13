@@ -22,12 +22,11 @@ describe('Albums', () => {
     });
 
     describe('/GET albums', () => {
-        it('it should return albums2', (done) => {
+        it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
-                .get('/albums')
-                .end((error, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.a('array');
+                .get('/albums/aaa')
+                .end((err, res) => {
+                    res.should.have.status(400);
                     done();
                 });
         });
@@ -38,9 +37,6 @@ describe('Albums', () => {
             chai.request(apiUrl)
                 .delete('/albums/123')
                 .end((err, res) => {
-                    if (res.status !== 400) {
-                        console.log(res.body);
-                    }
                     res.should.have.status(400);
                     done();
                 });

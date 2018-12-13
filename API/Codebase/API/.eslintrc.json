@@ -11,7 +11,8 @@
         "no-underscore-dangle": "off",
         "no-unused-vars": "off",
         "no-use-before-define": [2, "nofunc"],
-        "import/order": "off"
+        "import/order": "off",
+        "linebreak-style": "off"
     },
     "env": {
         "mocha": true

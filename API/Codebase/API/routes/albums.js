@@ -9,7 +9,7 @@ router.route('/albums')
     .get(albumsController.get)
     .post([
         validator.checkSchema(albumPolicy.create),
-        albumsController.create]);
+        (req, res, next) => albumsController.create(req, res, next, validator)]);
 
 router.route('/albums/:_id')
     .get([
