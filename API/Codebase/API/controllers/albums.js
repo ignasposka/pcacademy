@@ -20,8 +20,10 @@ exports.getSingle = (req, res, next, validator) => {
         Album.findById(requestData._id, (err, album) => {
             if (err) {
                 next(err);
-            } else {
+            } else if (album) {
                 res.status(200).send(album);
+            } else {
+                res.send(404);
             }
         });
     } else {

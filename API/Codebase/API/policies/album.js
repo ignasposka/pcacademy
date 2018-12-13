@@ -3,6 +3,7 @@ const { ObjectId } = require('mongoose').Types;
 exports.create = {
     name: {
         in: ['body'],
+        required: true,
         errorMessage: 'Album\'s name should be supplied'
     },
     visualElements: {
