@@ -78,13 +78,107 @@ describe('Albums', () => {
         });
     });
 
+    describe('/POST album with incorrect access object', () => {
+        it('it should return 400 (Bad Request)', (done) => {
+            chai.request(apiUrl)
+                .post('/albums')
+                .send({
+                    access: {
+                        allow: 'all'
+                    }
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
+    describe('/POST album with visual elements object instead of array', () => {
+        it('it should return 400 (Bad Request)', (done) => {
+            chai.request(apiUrl)
+                .post('/albums')
+                .send({
+                    visualElements: {
+                        seaPicture: '54759eb3c090d83494e2d804'
+                    }
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
     describe('/PATCH album with incorrect id', () => {
-        it('it should return no content', (done) => {
+        it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .patch('/albums/aaa')
                 .set('content-type', 'application/json')
                 .send({
                     name: 'patched!'
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
+    describe('/PATCH not existing album', () => {
+        it('it should return 404 (Not Found)', (done) => {
+            chai.request(apiUrl)
+                .patch('/albums/54759eb3c090d83494e2d804')
+                .set('content-type', 'application/json')
+                .send({
+                    name: 'patched!'
+                })
+                .end((err, res) => {
+                    if (res.status !== 404) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(404);
+                    done();
+                });
+        });
+    });
+
+    describe('/PATCH album with incorrect access object', () => {
+        it('it should return 400 (Bad Request)', (done) => {
+            chai.request(apiUrl)
+                .patch('/albums/54759eb3c090d83494e2d804')
+                .send({
+                    access: {
+                        allow: 'all'
+                    }
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
+    describe('/PATCH album with visual elements object instead of array', () => {
+        it('it should return 400 (Bad Request)', (done) => {
+            chai.request(apiUrl)
+                .patch('/albums/54759eb3c090d83494e2d804')
+                .send({
+                    visualElements: {
+                        seaPicture: '54759eb3c090d83494e2d804'
+                    }
                 })
                 .end((err, res) => {
                     if (res.status !== 400) {
@@ -102,6 +196,17 @@ describe('Albums', () => {
                 .delete('/albums/123')
                 .end((err, res) => {
                     res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
+    describe('/DELETE try delete not existing album', () => {
+        it('it should return 404 (Not Found)', (done) => {
+            chai.request(apiUrl)
+                .delete('/albums/54759eb3c090d83494e2d804')
+                .end((err, res) => {
+                    res.should.have.status(404);
                     done();
                 });
         });

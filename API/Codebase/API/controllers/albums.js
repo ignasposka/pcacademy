@@ -86,11 +86,14 @@ exports.delete = (req, res, next, validator) => {
 
     if (validationErrors.isEmpty()) {
         const requestData = filter.matchedData(req);
-        Album.findByIdAndDelete(requestData._id, (err) => {
+        Album.findByIdAndDelete(requestData._id, (err, deleted) => {
             if (err) {
                 next(err);
+            } else if (deleted) {
+                res.status(204).send();
+            } else {
+                res.status(404).send();
             }
-            res.status(204).send();
         });
     } else {
         res.status(400).send(validationErrors);
