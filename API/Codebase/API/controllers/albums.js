@@ -67,7 +67,7 @@ exports.patch = (req, res, next, validator) => {
             }
         });
 
-        Album.findOneAndUpdate(requestData._id, updateProperties, (err, result) => {
+        Album.findByIdAndUpdate(requestData._id, updateProperties, (err, result) => {
             if (err) {
                 next(err);
             } else if (result) {

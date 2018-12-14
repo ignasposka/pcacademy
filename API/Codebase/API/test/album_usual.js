@@ -48,7 +48,7 @@ describe('Albums', () => {
     describe('/PATCH album', () => {
         it('it should return no content', (done) => {
             chai.request(apiUrl)
-                .patch('/albums/5c0fa93fb12acf2df4de0ab9')
+                .patch(`/albums/${createdAlbumId}`)
                 .set('content-type', 'application/json')
                 .send({
                     name: 'patched!'

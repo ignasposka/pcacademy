@@ -19,7 +19,7 @@ describe('Albums', () => {
         });
     });
 
-    describe('/GET albums', () => {
+    describe('/GET albums with not ObjectId in params', () => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .get('/albums/aaa')
@@ -30,7 +30,7 @@ describe('Albums', () => {
         });
     });
 
-    describe('/GET albums', () => {
+    describe('/GET not existing album', () => {
         it('it should return 404 (Not Found)', (done) => {
             chai.request(apiUrl)
                 .get('/albums/54759eb3c090d83494e2d804')
@@ -41,7 +41,7 @@ describe('Albums', () => {
         });
     });
 
-    describe('/POST album', () => {
+    describe('/POST album without name', () => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
@@ -61,6 +61,40 @@ describe('Albums', () => {
         });
     });
 
+    describe('/POST album without access object', () => {
+        it('it should return 400 (Bad Request)', (done) => {
+            chai.request(apiUrl)
+                .post('/albums')
+                .send({
+                    name: 'Holiday!'
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
+
+    describe('/PATCH album with incorrect id', () => {
+        it('it should return no content', (done) => {
+            chai.request(apiUrl)
+                .patch('/albums/aaa')
+                .set('content-type', 'application/json')
+                .send({
+                    name: 'patched!'
+                })
+                .end((err, res) => {
+                    if (res.status !== 400) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(400);
+                    done();
+                });
+        });
+    });
 
     describe('/DELETE try pass incorrect id in params', () => {
         it('it should return 400 (Bad Request)', (done) => {
