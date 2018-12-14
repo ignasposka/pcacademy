@@ -3,11 +3,11 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const { expect } = require('chai');
 const chaiHtpp = require('chai-http');
-const AlbumModel = require('../models/album');
+const AlbumModel = require('../../models/album');
 const mlog = require('mocha-logger');
 
 const apiUrl = 'http://localhost:8080';
-require('../index.js');
+require('../../index.js');
 
 chai.should();
 chai.use(chaiHtpp);
