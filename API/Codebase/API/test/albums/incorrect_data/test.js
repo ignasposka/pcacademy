@@ -21,7 +21,7 @@ describe('Albums', () => {
         });
     });
 
-    testGet(apiUrl);
+    // testGet(apiUrl);
     testPost(apiUrl);
     testPatch(apiUrl);
     testDelete(apiUrl);

@@ -2,6 +2,21 @@ const express = require('express');
 const albumsController = require('../controllers/albums');
 const validator = require('express-validator/check');
 const albumPolicy = require('../policies/album');
+const jwt = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwks = require('jwks-rsa');
+
+const jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://ignasposka.eu.auth0.com/.well-known/jwks.json'
+    }),
+    audience: 'space-saver',
+    issuer: 'https://ignasposka.eu.auth0.com/',
+    algorithms: ['RS256']
+});
 
 const router = express.Router();
 
@@ -13,6 +28,7 @@ router.route('/albums')
 
 router.route('/albums/:_id')
     .get([
+        jwtCheck,
         validator.checkSchema(albumPolicy.get),
         (req, res, next) => albumsController.getSingle(req, res, next, validator)
     ])
