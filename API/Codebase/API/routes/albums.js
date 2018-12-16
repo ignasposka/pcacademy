@@ -28,7 +28,6 @@ router.route('/albums')
 
 router.route('/albums/:_id')
     .get([
-        jwtCheck,
         validator.checkSchema(albumPolicy.get),
         (req, res, next) => albumsController.getSingle(req, res, next, validator)
     ])

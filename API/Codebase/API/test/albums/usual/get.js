@@ -18,4 +18,16 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/GET albums', () => {
+        it('it should return albums', (done) => {
+            chai.request(apiUrl)
+                .get('/albums')
+                .end((error, response) => {
+                    response.should.have.status(200);
+                    response.body.should.be.a('array');
+                    done();
+                });
+        });
+    });
 };
