@@ -20,26 +20,38 @@ exports.getSingle = (req, res, next, validator) => {
         Album.findById(requestData._id, (err, album) => {
             if (err) {
                 next(err);
-            } else {
+            } else if (album) {
                 res.status(200).send(album);
+            } else {
+                res.send(404);
             }
         });
+    } else {
+        res.status(400).json({ errors: validationErrors.array() });
     }
 };
 
-exports.create = (req, res, next) => {
-    const album = new Album({
-        name: req.body.name,
-        access: req.body.access
-    });
+exports.create = (req, res, next, validator) => {
+    const validationErrors = validator.validationResult(req);
 
-    album.save((err, createdAlbum) => {
-        if (err) {
-            next(err);
-        } else {
-            res.status(201).send(createdAlbum);
-        }
-    });
+    if (validationErrors.isEmpty()) {
+        const requestData = filter.matchedData(req);
+
+        const album = new Album({
+            name: requestData.name,
+            access: requestData.access
+        });
+
+        album.save((err, createdAlbum) => {
+            if (err) {
+                next(err);
+            } else {
+                res.status(201).send(createdAlbum);
+            }
+        });
+    } else {
+        res.status(400).json({ errors: validationErrors.array() });
+    }
 };
 
 exports.patch = (req, res, next, validator) => {
@@ -55,7 +67,7 @@ exports.patch = (req, res, next, validator) => {
             }
         });
 
-        Album.findOneAndUpdate(requestData._id, updateProperties, (err, result) => {
+        Album.findByIdAndUpdate(requestData._id, updateProperties, (err, result) => {
             if (err) {
                 next(err);
             } else if (result) {
@@ -74,11 +86,16 @@ exports.delete = (req, res, next, validator) => {
 
     if (validationErrors.isEmpty()) {
         const requestData = filter.matchedData(req);
-        Album.findByIdAndDelete(requestData._id, (err) => {
+        Album.findByIdAndDelete(requestData._id, (err, deleted) => {
             if (err) {
                 next(err);
+            } else if (deleted) {
+                res.status(204).send();
+            } else {
+                res.status(404).send();
             }
-            res.status(204).send();
         });
+    } else {
+        res.status(400).send(validationErrors);
     }
 };

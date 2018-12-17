@@ -3,11 +3,14 @@ const { ObjectId } = require('mongoose').Types;
 exports.create = {
     name: {
         in: ['body'],
-        errorMessage: 'Album\'s name should be supplied'
+        required: true,
+        errorMessage: 'Album\'s name should be supplied',
+        isString: true
     },
     visualElements: {
         in: ['body'],
         isArray: true,
+        optional: true,
         custom: {
             options: (arr) => arr.every((element) => typeof element === 'string')
         },
@@ -19,7 +22,7 @@ exports.create = {
             options: (obj) => typeof obj === 'object'
                 && obj.collaborator
                 && obj.rights
-                && ['admin', 'write', 'read'].contains(obj.rights)
+                && ['admin', 'write', 'read'].includes(obj.rights)
         }
     }
 };
@@ -34,6 +37,7 @@ exports.patch = {
     },
     name: {
         in: ['body'],
+        optional: true,
         errorMessage: 'Album\'s name should be supplied'
     },
     visualElements: {
@@ -52,7 +56,7 @@ exports.patch = {
             options: (obj) => typeof obj === 'object'
                 && obj.collaborator
                 && obj.rights
-                && ['admin', 'write', 'read'].contains(obj.rights)
+                && ['admin', 'write', 'read'].includes(obj.rights)
         }
     }
 };
