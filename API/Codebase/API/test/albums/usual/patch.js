@@ -7,6 +7,7 @@ module.exports = (apiUrl) => {
             chai.request(apiUrl)
                 .patch(`/albums/${process.env.CREATED_ALBUM_ID}`)
                 .set('content-type', 'application/json')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'patched!'
                 })

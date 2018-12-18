@@ -6,6 +6,7 @@ module.exports = (apiUrl) => {
         it('it should return created album', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'test',
                     access: {

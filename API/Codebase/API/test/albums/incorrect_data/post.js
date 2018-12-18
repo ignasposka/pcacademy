@@ -5,6 +5,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     access: {
                         collaborator: '54759eb3c090d83494e2d804',
@@ -25,6 +26,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'Holiday!'
                 })
@@ -42,6 +44,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     access: {
                         allow: 'all'
@@ -61,6 +64,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .post('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     visualElements: {
                         seaPicture: '54759eb3c090d83494e2d804'

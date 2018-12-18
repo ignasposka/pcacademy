@@ -6,6 +6,7 @@ module.exports = (apiUrl) => {
             chai.request(apiUrl)
                 .patch('/albums/aaa')
                 .set('content-type', 'application/json')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'patched!'
                 })
@@ -24,6 +25,7 @@ module.exports = (apiUrl) => {
             chai.request(apiUrl)
                 .patch('/albums/54759eb3c090d83494e2d804')
                 .set('content-type', 'application/json')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'patched!'
                 })
@@ -41,6 +43,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .patch('/albums/54759eb3c090d83494e2d804')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     access: {
                         allow: 'all'
@@ -60,6 +63,7 @@ module.exports = (apiUrl) => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)
                 .patch('/albums/54759eb3c090d83494e2d804')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     visualElements: {
                         seaPicture: '54759eb3c090d83494e2d804'
@@ -74,5 +78,4 @@ module.exports = (apiUrl) => {
                 });
         });
     });
-}
-;
+};

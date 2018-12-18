@@ -3,7 +3,6 @@ const albumsController = require('../controllers/albums');
 const validator = require('express-validator/check');
 const albumPolicy = require('../policies/album');
 const jwt = require('express-jwt');
-const jwtAuthz = require('express-jwt-authz');
 const jwks = require('jwks-rsa');
 
 const jwtCheck = jwt({
@@ -23,6 +22,7 @@ const router = express.Router();
 router.route('/albums')
     .get(albumsController.get)
     .post([
+        jwtCheck,
         validator.checkSchema(albumPolicy.create),
         (req, res, next) => albumsController.create(req, res, next, validator)]);
 
@@ -32,10 +32,12 @@ router.route('/albums/:_id')
         (req, res, next) => albumsController.getSingle(req, res, next, validator)
     ])
     .patch([
+        jwtCheck,
         validator.checkSchema(albumPolicy.patch),
         (req, res, next) => albumsController.patch(req, res, next, validator)
     ])
     .delete([
+        jwtCheck,
         validator.checkSchema(albumPolicy.delete),
         (req, res, next) => albumsController.delete(req, res, next, validator)
     ]);
