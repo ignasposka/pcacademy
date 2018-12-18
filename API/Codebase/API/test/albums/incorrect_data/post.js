@@ -22,24 +22,6 @@ module.exports = (apiUrl) => {
         });
     });
 
-    describe('/POST album without access object', () => {
-        it('it should return 400 (Bad Request)', (done) => {
-            chai.request(apiUrl)
-                .post('/albums')
-                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
-                .send({
-                    name: 'Holiday!'
-                })
-                .end((err, res) => {
-                    if (res.status !== 400) {
-                        console.log(res.body);
-                    }
-                    res.should.have.status(400);
-                    done();
-                });
-        });
-    });
-
     describe('/POST album with incorrect access object', () => {
         it('it should return 400 (Bad Request)', (done) => {
             chai.request(apiUrl)

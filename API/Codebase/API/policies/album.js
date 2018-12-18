@@ -18,6 +18,7 @@ exports.create = {
     },
     access: {
         in: ['body'],
+        optional: true,
         custom: {
             options: (obj) => typeof obj === 'object'
                 && obj.collaborator
