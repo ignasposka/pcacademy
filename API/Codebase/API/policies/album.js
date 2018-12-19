@@ -18,13 +18,15 @@ exports.create = {
     },
     access: {
         in: ['body'],
+        isArray: true,
         optional: true,
         custom: {
-            options: (obj) => typeof obj === 'object'
+            options: (input) => Array.isArray(input) && input.every((obj) => typeof obj === 'object'
                 && obj.collaborator
                 && obj.rights
-                && ['admin', 'write', 'read'].includes(obj.rights)
-        }
+                && ['admin', 'write', 'read'].includes(obj.rights))
+        },
+        errorMessage: 'Access parameter should be array of objects which includes collaborator and right (admin/write/read)'
     }
 };
 
@@ -52,13 +54,15 @@ exports.patch = {
     },
     access: {
         in: ['body'],
+        isArray: true,
         optional: true,
         custom: {
-            options: (obj) => typeof obj === 'object'
+            options: (input) => Array.isArray(input) && input.every((obj) => typeof obj === 'object'
                 && obj.collaborator
                 && obj.rights
-                && ['admin', 'write', 'read'].includes(obj.rights)
-        }
+                && ['admin', 'write', 'read'].includes(obj.rights))
+        },
+        errorMessage: 'Access parameter should be array of objects which includes collaborator and right (admin/write/read)'
     }
 };
 

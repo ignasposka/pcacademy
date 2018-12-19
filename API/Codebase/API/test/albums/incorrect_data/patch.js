@@ -45,9 +45,9 @@ module.exports = (apiUrl) => {
                 .patch('/albums/54759eb3c090d83494e2d804')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
-                    access: {
+                    access: [{
                         allow: 'all'
-                    }
+                    }]
                 })
                 .end((err, res) => {
                     if (res.status !== 400) {

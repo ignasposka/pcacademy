@@ -9,10 +9,10 @@ module.exports = (apiUrl) => {
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
                     name: 'test',
-                    access: {
+                    access: [{
                         collaborator: '54759eb3c090d83494e2d804',
                         rights: 'admin'
-                    }
+                    }]
                 })
                 .end((err, res) => {
                     if (res.status !== 201) {

@@ -7,10 +7,10 @@ module.exports = (apiUrl) => {
                 .post('/albums')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
-                    access: {
+                    access: [{
                         collaborator: '54759eb3c090d83494e2d804',
                         rights: 'admin'
-                    }
+                    }]
                 })
                 .end((err, res) => {
                     if (res.status !== 400) {
@@ -28,9 +28,9 @@ module.exports = (apiUrl) => {
                 .post('/albums')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
-                    access: {
+                    access: [{
                         allow: 'all'
-                    }
+                    }]
                 })
                 .end((err, res) => {
                     if (res.status !== 400) {
