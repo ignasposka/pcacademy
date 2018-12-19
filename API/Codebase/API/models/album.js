@@ -7,7 +7,7 @@ const AlbumSchema = new Schema({
     visualElements: { type: [String] },
     access: {
         type: [{
-            collaborator: mongoose.Schema.Types.ObjectId,
+            collaborator: String,
             rights: { type: String, enum: ['admin', 'write', 'read'] }
         }],
         required: true

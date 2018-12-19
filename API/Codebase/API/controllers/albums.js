@@ -1,5 +1,6 @@
 const Album = require('../models/album');
 const filter = require('express-validator/filter');
+const jwtDecode = require('jwt-decode');
 
 exports.get = (req, res, next) => {
     // eslint-disable-next-line array-callback-return
@@ -36,10 +37,11 @@ exports.create = (req, res, next, validator) => {
 
     if (validationErrors.isEmpty()) {
         const requestData = filter.matchedData(req);
-
+        const jwtToken = req.get('Authorization');
+        const userInfo = jwtDecode(jwtToken);
         const album = new Album({
             name: requestData.name,
-            access: requestData.access
+            access: [...requestData.access, { collaborator: userInfo.sub, rights: 'admin' }]
         });
 
         album.save((err, createdAlbum) => {
