@@ -1,7 +1,9 @@
 const chai = require('chai');
 const { expect } = require('chai');
+const jwtDecode = require('jwt-decode');
 
 module.exports = (apiUrl) => {
+    const collaborator = jwtDecode(process.env.ACCESS_TOKEN).sub;
     describe('/POST album', () => {
         it('it should return created album', (done) => {
             chai.request(apiUrl)
@@ -22,6 +24,8 @@ module.exports = (apiUrl) => {
                     }
                     res.should.have.status(201);
                     res.body.should.contain.keys('name', 'access', 'visualElements', '_id');
+                    expect(res.body).to.have.property('access').to.be.a('array');
+                    expect(res.body.access[0].collaborator).to.be.equals(collaborator);
                     done();
                 });
         });

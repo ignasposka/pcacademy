@@ -41,7 +41,7 @@ exports.create = (req, res, next, validator) => {
         const userInfo = jwtDecode(jwtToken);
         const album = new Album({
             name: requestData.name,
-            access: [...requestData.access, { collaborator: userInfo.sub, rights: 'admin' }]
+            access: [{ collaborator: userInfo.sub, rights: 'admin' }, ...requestData.access]
         });
 
         album.save((err, createdAlbum) => {
