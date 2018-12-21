@@ -73,7 +73,7 @@ exports.patch = (req, res, next, validator) => {
             if (err) {
                 next(err);
             } else if (result) {
-                res.status(204).send();
+                res.status(200).send(result);
             } else {
                 res.status(404).send();
             }

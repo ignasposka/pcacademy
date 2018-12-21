@@ -12,10 +12,13 @@ module.exports = (apiUrl) => {
                     name: 'patched!'
                 })
                 .end((err, res) => {
-                    if (res.status !== 204) {
+                    if (res.status !== 200) {
                         console.log(res.body);
                     }
-                    res.should.have.status(204);
+                    res.should.have.status(200);
+                    res.body.should.contain.keys('name', 'access', 'visualElements', '_id');
+                    expect(res.body).to.have.property('access').to.be.a('array');
+                    expect(res.body).to.have.property('visualElements').to.be.a('array');
                     done();
                 });
         });
