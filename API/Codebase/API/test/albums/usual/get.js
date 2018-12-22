@@ -1,7 +1,12 @@
 const chai = require('chai');
 const { expect } = require('chai');
+const jwtDecode = require('jwt-decode');
 
 module.exports = (apiUrl) => {
+    const userToken = process.env.ACCESS_TOKEN;
+    const { sub: userId } = jwtDecode(userToken);
+
+
     describe('/GET single album', () => {
         it('it should return created album', (done) => {
             chai.request(apiUrl)
