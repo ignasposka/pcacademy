@@ -23,7 +23,7 @@ module.exports = (apiUrl) => {
                         process.env.CREATED_ALBUM_ID = res.body._id;
                     }
                     res.should.have.status(201);
-                    res.body.should.contain.keys('name', 'access', 'visualElements', '_id');
+                    res.body.should.contain.keys('name', 'access', 'mediaItems', '_id');
                     expect(res.body).to.have.property('access').to.be.a('array');
                     expect(res.body.access[0].collaborator).to.be.equals(collaborator);
                     done();

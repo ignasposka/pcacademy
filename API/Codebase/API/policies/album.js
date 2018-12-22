@@ -7,7 +7,7 @@ exports.create = {
         errorMessage: 'Album\'s name should be supplied',
         isString: true
     },
-    visualElements: {
+    mediaItems: {
         in: ['body'],
         isArray: true,
         optional: true,
@@ -43,7 +43,7 @@ exports.patch = {
         optional: true,
         errorMessage: 'Album\'s name should be supplied'
     },
-    visualElements: {
+    mediaItems: {
         in: ['body'],
         isArray: true,
         optional: true,

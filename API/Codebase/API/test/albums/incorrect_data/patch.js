@@ -65,7 +65,7 @@ module.exports = (apiUrl) => {
                 .patch('/albums/54759eb3c090d83494e2d804')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
-                    visualElements: {
+                    mediaItems: {
                         seaPicture: '54759eb3c090d83494e2d804'
                     }
                 })

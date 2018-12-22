@@ -48,7 +48,7 @@ module.exports = (apiUrl) => {
                 .post('/albums')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .send({
-                    visualElements: {
+                    mediaItems: {
                         seaPicture: '54759eb3c090d83494e2d804'
                     }
                 })
