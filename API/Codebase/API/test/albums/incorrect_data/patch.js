@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
+const { expect } = require('chai');
 
 module.exports = (apiUrl) => {
     describe('/PATCH album with incorrect id', () => {
@@ -11,6 +13,7 @@ module.exports = (apiUrl) => {
                     name: 'patched!'
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 400) {
                         console.log(res.body);
                     }
@@ -30,6 +33,7 @@ module.exports = (apiUrl) => {
                     name: 'patched!'
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 404) {
                         console.log(res.body);
                     }

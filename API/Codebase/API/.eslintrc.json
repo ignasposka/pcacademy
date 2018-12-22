@@ -12,7 +12,8 @@
         "no-unused-vars": "off",
         "no-use-before-define": [2, "nofunc"],
         "import/order": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "no-console": "off"
     },
     "env": {
         "mocha": true

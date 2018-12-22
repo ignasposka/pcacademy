@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
 const { expect } = require('chai');
-const chaiHtpp = require('chai-http');
 
 module.exports = (apiUrl) => {
     describe('/GET albums with not ObjectId in params', () => {
@@ -19,6 +19,7 @@ module.exports = (apiUrl) => {
             chai.request(apiUrl)
                 .get('/albums/54759eb3c090d83494e2d804')
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     res.should.have.status(404);
                     done();
                 });

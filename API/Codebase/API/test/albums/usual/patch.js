@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
 const { expect } = require('chai');
 
@@ -12,6 +13,7 @@ module.exports = (apiUrl) => {
                     name: 'patched!'
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 200) {
                         console.log(res.body);
                     }

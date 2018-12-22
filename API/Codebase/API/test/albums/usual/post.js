@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
 const { expect } = require('chai');
 const jwtDecode = require('jwt-decode');
@@ -17,6 +18,7 @@ module.exports = (apiUrl) => {
                     }]
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 201) {
                         console.log(res.body);
                     } else {

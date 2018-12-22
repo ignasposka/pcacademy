@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
 const { expect } = require('chai');
 const jwtDecode = require('jwt-decode');
@@ -13,6 +14,7 @@ module.exports = (apiUrl) => {
             chai.request(apiUrl)
                 .get(`/albums/${process.env.CREATED_ALBUM_ID}`)
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 200) {
                         console.log(res.body);
                     }
@@ -33,7 +35,8 @@ module.exports = (apiUrl) => {
         it('it should return albums', (done) => {
             chai.request(apiUrl)
                 .get('/albums')
-                .end((error, res) => {
+                .end((err, res) => {
+                    expect(err).to.be.null;
                     res.should.have.status(200);
                     res.body.forEach((album) => {
                         album.should.shallowDeepEqual({
