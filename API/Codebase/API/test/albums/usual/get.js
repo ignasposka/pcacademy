@@ -1,6 +1,7 @@
 const chai = require('chai');
 const { expect } = require('chai');
 const jwtDecode = require('jwt-decode');
+chai.use(require('chai-shallow-deep-equal'));
 
 module.exports = (apiUrl) => {
     const userToken = process.env.ACCESS_TOKEN;
@@ -18,6 +19,11 @@ module.exports = (apiUrl) => {
                     res.should.have.status(200);
                     expect(res.body).to.have.property('_id').to.be.equal(process.env.CREATED_ALBUM_ID);
                     expect(res.body).to.have.property('name').to.be.equal('patched!');
+                    res.body.should.shallowDeepEqual({
+                        access: [{
+                            collaborator: userId
+                        }]
+                    });
                     done();
                 });
         });
@@ -27,9 +33,15 @@ module.exports = (apiUrl) => {
         it('it should return albums', (done) => {
             chai.request(apiUrl)
                 .get('/albums')
-                .end((error, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.a('array');
+                .end((error, res) => {
+                    res.should.have.status(200);
+                    res.body.forEach((album) => {
+                        album.should.shallowDeepEqual({
+                            access: [{
+                                collaborator: userId
+                            }]
+                        });
+                    });
                     done();
                 });
         });
