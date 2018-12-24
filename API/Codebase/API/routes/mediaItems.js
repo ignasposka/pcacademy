@@ -31,11 +31,8 @@ const storage = multer.diskStorage({
         });
     }
 });
-let u;
 
 const upload = multer({ storage });
-
-upload.single('picture');
 
 router.route('/albums/:_id/mediaItems')
     .post([
