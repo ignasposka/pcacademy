@@ -14,7 +14,7 @@ chai.use(chaiHtpp);
 
 describe('Media Items', () => {
     before((done) => {
-        rimraf('/some/directory', () => done());
+        rimraf('uploads/*', () => done());
     });
 
     testPost(apiUrl);
