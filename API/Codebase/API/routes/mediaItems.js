@@ -3,9 +3,7 @@ const validator = require('express-validator/check');
 const mediaItemsController = require('../controllers/mediaItems');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
-const multer = require('multer');
-const crypto = require('crypto');
-const mime = require('mime');
+const { upload } = require('../controllers/mediaItems');
 
 const jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
@@ -21,25 +19,11 @@ const jwtCheck = jwt({
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-    destination(req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename(req, file, cb) {
-        crypto.pseudoRandomBytes(16, (err, raw) => {
-            cb(null, `${raw.toString('hex') + Date.now()}.${mime.getExtension(file.mimetype)}`);
-        });
-    }
-});
-
-const upload = multer({ storage });
 
 router.route('/albums/:_id/mediaItems')
     .post([
         upload.single('picture'),
-        (req, res, next) => {
-            res.status(201).send();
-        }
+        mediaItemsController.createCb
     ]);
 
 module.exports = router;
