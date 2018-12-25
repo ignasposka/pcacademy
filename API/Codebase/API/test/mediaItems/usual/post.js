@@ -2,7 +2,7 @@ const chai = require('chai');
 const { expect } = require('chai');
 
 module.exports = (apiUrl) => {
-    describe('/POST album', () => {
+    describe('/POST picture', () => {
         it('it should return 201 (Created)', (done) => {
             chai.request(apiUrl)
                 .post(`/albums/${process.env.CREATED_ALBUM_ID}/mediaItems`)

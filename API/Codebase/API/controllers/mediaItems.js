@@ -1,8 +1,7 @@
-const aws = require('aws-sdk');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
 const crypto = require('crypto');
 const mime = require('mime');
+const Album = require('../models/album');
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
@@ -20,7 +19,14 @@ const upload = multer({ storage });
 exports.upload = upload;
 
 exports.createCb = (req, res, next) => {
-    res.status(201).send(
-        { filename: req.file.filename }
-    );
+    Album.findByIdAndUpdate(req.params._albumId, { $push: { mediaItems: req.file.filename } },
+        (err, result) => {
+            if (err) {
+                next(err);
+            } else if (result) {
+                res.status(201).send({ filename: req.file.filename });
+            } else {
+                res.status(404).send();
+            }
+        });
 };

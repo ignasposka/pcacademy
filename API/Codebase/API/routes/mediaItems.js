@@ -20,7 +20,7 @@ const jwtCheck = jwt({
 const router = express.Router();
 
 
-router.route('/albums/:_id/mediaItems')
+router.route('/albums/:_albumId/mediaItems')
     .post([
         upload.single('picture'),
         mediaItemsController.createCb
