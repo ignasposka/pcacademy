@@ -21,6 +21,6 @@ exports.upload = upload;
 
 exports.createCb = (req, res, next) => {
     res.status(201).send(
-        { filename: req.filename }
+        { filename: req.file.filename }
     );
 };

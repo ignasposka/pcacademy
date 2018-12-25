@@ -12,6 +12,8 @@ module.exports = (apiUrl) => {
                         console.log(res.body);
                     }
                     res.should.have.status(201);
+                    res.body.should.contain.key('filename');
+                    process.env.CREATED_FILE_ID = res.body.filename;
                     done();
                 });
         });
