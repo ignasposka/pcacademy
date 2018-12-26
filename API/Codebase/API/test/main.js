@@ -32,8 +32,9 @@ const testMediaItemsUsual = () => {
 
 chai.should();
 chai.use(chaiHtpp);
+
 loadToken().then(() => {
-    describe('Albums', () => {
+    describe('Main test', () => {
         before((done) => {
             AlbumModel.deleteMany({}, (err) => {
                 rimraf('uploads/*', () => done());

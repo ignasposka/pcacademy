@@ -1,6 +1,4 @@
 const chai = require('chai');
-const { expect } = require('chai');
-const chaiHtpp = require('chai-http');
 
 module.exports = (apiUrl) => {
     describe('/GET albums with not ObjectId in params', () => {
