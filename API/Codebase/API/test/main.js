@@ -21,6 +21,7 @@ const testAlbumsUsual = () => {
 };
 
 const testAlbumsIncorrect = () => {
+    albumsIncorrect.delete(apiUrl);
     albumsIncorrect.post(apiUrl);
     albumsIncorrect.patch(apiUrl);
     albumsIncorrect.get(apiUrl);
@@ -44,5 +45,6 @@ loadToken().then(() => {
         testAlbumsUsual();
         // testAlbumsIncorrect();
         testMediaItemsUsual();
+        albumsUsual.delete(apiUrl);
     });
 });

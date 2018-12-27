@@ -1,8 +1,8 @@
 const chai = require('chai');
 const { expect } = require('chai');
 
-module.exports = () => {
-    describe('/DELETE album', (apiUrl) => {
+module.exports = (apiUrl) => {
+    describe('/DELETE album', () => {
         it('it should delete album, return 204', (done) => {
             chai.request(apiUrl)
                 .delete(`/albums/${process.env.CREATED_ALBUM_ID}`)

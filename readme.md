@@ -4,4 +4,4 @@
 
 ##TODO
 * Create route for file upload /albums/:albumId/mediaItems ✔
-* Check if album is actually being deleted
+* Check if album is actually being deleted ✔
