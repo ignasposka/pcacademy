@@ -26,4 +26,9 @@ router.route('/albums/:_albumId/mediaItems')
         mediaItemsController.createCb
     ]);
 
+router.route('/albums/:_albumId/mediaItems/_id')
+    .get([
+        mediaItemsController.getSingle
+    ]);
+
 module.exports = router;

@@ -2,6 +2,7 @@ const multer = require('multer');
 const crypto = require('crypto');
 const mime = require('mime');
 const Album = require('../models/album');
+const filter = require('express-validator/filter');
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
@@ -29,4 +30,21 @@ exports.createCb = (req, res, next) => {
                 res.status(404).send();
             }
         });
+};
+
+exports.getSingle = (req, res, next, validator) => {
+    const validationErrors = validator.validationResult(req);
+
+    if (validationErrors.isEmpty()) {
+        const requestData = filter.matchedData(req);
+        Album.findById(requestData._albumId, (err, album) => {
+            if (err) {
+                next(err);
+            } else if (album.indexOf(requestData._id) > -1) {
+                res.sendFile(`uploads/${requestData._id}`);
+            } else {
+                res.sendStatus(404);
+            }
+        });
+    }
 };

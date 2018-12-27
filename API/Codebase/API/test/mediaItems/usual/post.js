@@ -1,5 +1,4 @@
 const chai = require('chai');
-const { expect } = require('chai');
 
 module.exports = (apiUrl) => {
     describe('/POST picture', () => {

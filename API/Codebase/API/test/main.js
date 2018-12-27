@@ -29,6 +29,7 @@ const testAlbumsIncorrect = () => {
 
 const testMediaItemsUsual = () => {
     mediaItemsUsual.post(apiUrl);
+    mediaItemsUsual.get(apiUrl);
 };
 
 chai.should();
