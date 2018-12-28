@@ -40,8 +40,8 @@ exports.getSingle = (req, res, next, validator) => {
         Album.findById(requestData._albumId, (err, album) => {
             if (err) {
                 next(err);
-            } else if (album.indexOf(requestData._id) > -1) {
-                res.sendFile(`uploads/${requestData._id}`);
+            } else if (album.mediaItems.indexOf(requestData._id) > -1) {
+                res.sendFile(`${process.env.ROOT_DIR}/uploads/${requestData._id}`);
             } else {
                 res.sendStatus(404);
             }

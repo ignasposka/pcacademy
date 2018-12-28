@@ -1,4 +1,8 @@
 const chai = require('chai');
+const fs = require('fs');
+const path = require('path');
+const { expect } = require('chai');
+chai.use(require('chai-bytes'));
 
 module.exports = (apiUrl) => {
     describe('/GET single picture', () => {
@@ -10,7 +14,8 @@ module.exports = (apiUrl) => {
                         console.log(res.body);
                     }
                     res.should.have.status(200);
-                    res.body.should.be.an('array');
+                    const fileToMatch = fs.readFileSync(`uploads/${process.env.CREATED_FILE_ID}`);
+                    expect(res.body).to.be.equalBytes(fileToMatch);
                     done();
                 });
         });

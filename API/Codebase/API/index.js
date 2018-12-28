@@ -17,6 +17,7 @@ connectToDb((err) => {
 });
 
 function initialize() {
+    setRootDir();
     const app = express();
 
     app.use(bodyParser.json());
@@ -28,4 +29,8 @@ function initialize() {
     app.listen(process.env.API_PORT, () => {
         console.log(`Server started! Listening on ${process.env.API_PORT} port.`);
     });
+}
+
+function setRootDir() {
+    process.env.ROOT_DIR = __dirname;
 }
