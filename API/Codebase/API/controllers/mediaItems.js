@@ -20,16 +20,18 @@ const upload = multer({ storage });
 exports.upload = upload;
 
 exports.createCb = (req, res, next) => {
-    Album.findByIdAndUpdate(req.params._albumId, { $push: { mediaItems: req.file.filename } },
-        (err, result) => {
-            if (err) {
-                next(err);
-            } else if (result) {
-                res.status(201).send({ filename: req.file.filename });
-            } else {
-                res.status(404).send();
-            }
-        });
+    Album.findByIdAndUpdate(req.params._albumId, {
+        $push: { mediaItems: req.files.map((file) => file.filename) }
+    },
+    (err, result) => {
+        if (err) {
+            next(err);
+        } else if (result) {
+            res.status(201).send({ filenames: req.files.map((file) => file.filename) });
+        } else {
+            res.status(404).send();
+        }
+    });
 };
 
 exports.getSingle = (req, res, next, validator) => {

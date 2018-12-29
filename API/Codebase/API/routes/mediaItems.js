@@ -23,7 +23,7 @@ const router = express.Router();
 
 router.route('/albums/:_albumId/mediaItems')
     .post([
-        upload.single('picture'),
+        upload.array('picture'),
         mediaItemsController.createCb
     ]);
 
