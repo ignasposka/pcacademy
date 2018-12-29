@@ -5,7 +5,7 @@ module.exports = (apiUrl) => {
         it('it should return 201 (Created)', (done) => {
             chai.request(apiUrl)
                 .post(`/albums/${process.env.CREATED_ALBUM_ID}/mediaItems`)
-                .attach('picture', 'D:\\IT fun pictures\\spending_rest_life_in_emacs.jpg', 'spending_rest_life_in_emacs.jpg')
+                .attach('picture', 'test/mediaItems/usual/spending_rest_life_in_emacs.jpg', 'spending_rest_life_in_emacs.jpg')
                 .end((err, res) => {
                     if (res.status !== 201) {
                         console.log(res.body);
