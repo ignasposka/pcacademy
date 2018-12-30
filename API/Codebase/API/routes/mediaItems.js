@@ -31,6 +31,10 @@ router.route('/albums/:_albumId/mediaItems/:_id')
     .get([
         validator.checkSchema(mediaItemsPolicy.getSingle),
         (req, res, next) => mediaItemsController.getSingle(req, res, next, validator)
+    ])
+    .delete([
+        validator.checkSchema(mediaItemsPolicy.delete),
+        (req, res, next) => mediaItemsController.delete(req, res, next, validator)
     ]);
 
 module.exports = router;

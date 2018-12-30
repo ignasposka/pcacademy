@@ -5,4 +5,5 @@
 ##TODO
 * Create route for file upload /albums/:albumId/mediaItems ✔
 * Check if album is actually being deleted ✔
-* Implement multiple file upload 
+* Implement multiple file upload ✔
+* Add authorisation for mediaItems

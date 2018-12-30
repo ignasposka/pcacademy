@@ -13,3 +13,17 @@ exports.getSingle = {
         errorMessage: 'MediaItem id must be provided'
     }
 };
+
+exports.delete = {
+    _albumId: {
+        in: ['params'],
+        errorMessage: 'Album id is invalid',
+        custom: {
+            options: (id) => ObjectId.isValid(id)
+        }
+    },
+    _id: {
+        in: ['params'],
+        errorMessage: 'MediaItem id must be provided'
+    }
+};
