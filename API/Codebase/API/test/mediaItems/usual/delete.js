@@ -8,6 +8,7 @@ module.exports = (apiUrl) => {
         it('it should return 204 (No Content)', (done) => {
             chai.request(apiUrl)
                 .delete(`/albums/${process.env.CREATED_ALBUM_ID}/mediaItems/${process.env.CREATED_FILE_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
                     if (res.status !== 204) {
                         console.log(res.body);

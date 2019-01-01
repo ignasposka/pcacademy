@@ -23,6 +23,7 @@ const router = express.Router();
 
 router.route('/albums/:_albumId/mediaItems')
     .post([
+        jwtCheck,
         upload.array('picture'),
         mediaItemsController.createCb
     ]);
@@ -33,6 +34,7 @@ router.route('/albums/:_albumId/mediaItems/:_id')
         (req, res, next) => mediaItemsController.getSingle(req, res, next, validator)
     ])
     .delete([
+        jwtCheck,
         validator.checkSchema(mediaItemsPolicy.delete),
         (req, res, next) => mediaItemsController.delete(req, res, next, validator)
     ]);
