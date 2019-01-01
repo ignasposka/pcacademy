@@ -1,7 +1,7 @@
 const chai = require('chai');
-const fs = require('fs');
-const path = require('path');
 chai.use(require('chai-bytes'));
+const { expect } = require('chai');
+const Album = require('../../../models/album');
 
 module.exports = (apiUrl) => {
     describe('/DELETE single picture', () => {
@@ -13,8 +13,27 @@ module.exports = (apiUrl) => {
                         console.log(res.body);
                     }
                     res.should.have.status(204);
-                    done();
+                    isPhotoDeleted()
+                        .then((isDeleted) => {
+                            expect(isDeleted).to.be.equals(true);
+                            done();
+                        })
+                        .catch((err) => { throw err; });
                 });
         });
     });
 };
+
+function isPhotoDeleted(albumId) {
+    return new Promise((resolve, reject) => {
+        Album.findById(albumId, (err, result) => {
+            if (err) {
+                reject(err);
+            } else if (result) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+}
