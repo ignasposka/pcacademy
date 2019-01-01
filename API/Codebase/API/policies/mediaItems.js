@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
+const { doesUserHaveAccess } = require('../controllers/albums');
 
 exports.getSingle = {
     _albumId: {
@@ -19,7 +20,13 @@ exports.delete = {
         in: ['params'],
         errorMessage: 'Album id is invalid',
         custom: {
-            options: (id) => ObjectId.isValid(id)
+            options: (id) => ObjectId.isValid(id) && doesUserHaveAccess()
+                .then((result) => {
+                    if (!result) {
+                        return Promise.reject(new Error(`You have no access to modify album with id: ${id}`));
+                    }
+                })
+                .catch((err) => Promise.reject(err))
         }
     },
     _id: {
