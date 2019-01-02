@@ -20,10 +20,10 @@ exports.delete = {
         in: ['params'],
         errorMessage: 'Album id is invalid',
         custom: {
-            options: (id) => ObjectId.isValid(id) && doesUserHaveAccess()
-                .then((result) => {
+            options: (id, { req }) => ObjectId.isValid(id) && doesUserHaveAccess(req.get('Authorization'), id)
+                .then(([result, message = `You have no access to modify album with id: ${id}`]) => {
                     if (!result) {
-                        return Promise.reject(new Error(`You have no access to modify album with id: ${id}`));
+                        return Promise.reject(new Error(message));
                     }
                 })
                 .catch((err) => Promise.reject(err))

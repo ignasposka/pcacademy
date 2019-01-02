@@ -98,7 +98,7 @@ exports.delete = (req, res, next, validator) => {
             }
         });
     } else {
-        res.status(400).send(validationErrors);
+        res.status(400).json({ errors: validationErrors.array() });
     }
 };
 
@@ -116,7 +116,7 @@ exports.doesUserHaveAccess = (jwt, albumId) => new Promise((resolve, reject) => 
                 resolve(false);
             }
         } else {
-            reject(new Error('Album with such id does not exist'));
+            resolve([false, 'Album with such id does not exist']);
         }
     });
 });
