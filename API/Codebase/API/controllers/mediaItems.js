@@ -49,7 +49,7 @@ exports.getSingle = (req, res, next, validator) => {
         Album.findById(requestData._albumId, (err, album) => {
             if (err) {
                 next(err);
-            } else if (album.mediaItems.indexOf(requestData._id) > -1) {
+            } else if (album && album.mediaItems.indexOf(requestData._id) > -1) {
                 res.sendFile(`${process.env.ROOT_DIR}/uploads/${requestData._id}`);
             } else {
                 res.status(404).send();

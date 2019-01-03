@@ -9,6 +9,7 @@ const loadToken = require('./loadToken');
 const albumsUsual = require('./albums/usual');
 const albumsIncorrect = require('./albums/incorrect_data');
 const mediaItemsUsual = require('./mediaItems/usual');
+const mediaItemsIncorrect = require('./mediaItems/incorrect');
 const rimraf = require('rimraf');
 
 const apiUrl = 'http://localhost:8080';
@@ -33,6 +34,10 @@ const testMediaItemsUsual = () => {
     mediaItemsUsual.delete(apiUrl);
 };
 
+const testMediaItemsIncorrect = () => {
+    mediaItemsIncorrect.get(apiUrl);
+};
+
 chai.should();
 chai.use(chaiHtpp);
 
@@ -46,6 +51,7 @@ loadToken().then(() => {
 
         testAlbumsUsual();
         // testAlbumsIncorrect();
+        testMediaItemsIncorrect();
         testMediaItemsUsual();
         albumsUsual.delete(apiUrl);
     });

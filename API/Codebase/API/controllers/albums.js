@@ -120,3 +120,22 @@ exports.doesUserHaveAccess = (jwt, albumId) => new Promise((resolve, reject) => 
         }
     });
 });
+
+exports.doesUserHaveAccessToGet = (jwt, albumId) => new Promise((resolve, reject) => {
+    const userInfo = jwtDecode(jwt);
+    const userId = userInfo.sub;
+
+    Album.findById(albumId, (err, album) => {
+        if (err) {
+            throw err;
+        } else if (album) {
+            if (album.access.map((acc) => acc.collaborator).includes(userId)) {
+                resolve([true]);
+            } else {
+                resolve([false]);
+            }
+        } else {
+            resolve([false, 'Album with such id does not exist']);
+        }
+    });
+});
