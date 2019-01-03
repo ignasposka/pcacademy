@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
 const { expect } = require('chai');
 
@@ -8,6 +9,7 @@ module.exports = (apiUrl) => {
                 .delete(`/albums/${process.env.CREATED_ALBUM_ID}`)
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 204) {
                         console.log(res.body);
                     }

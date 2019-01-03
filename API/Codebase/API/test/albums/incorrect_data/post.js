@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
+const { expect } = require('chai');
 
 module.exports = (apiUrl) => {
     describe('/POST album without name', () => {
@@ -13,6 +15,7 @@ module.exports = (apiUrl) => {
                     }]
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 400) {
                         console.log(res.body);
                     }
@@ -33,6 +36,7 @@ module.exports = (apiUrl) => {
                     }]
                 })
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     if (res.status !== 400) {
                         console.log(res.body);
                     }

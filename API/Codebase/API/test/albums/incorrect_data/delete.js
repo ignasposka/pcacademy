@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-expressions */
 const chai = require('chai');
+const { expect } = require('chai');
 
 module.exports = (apiUrl) => {
     describe('/DELETE try pass incorrect id in params', () => {
@@ -19,6 +21,7 @@ module.exports = (apiUrl) => {
                 .delete('/albums/54759eb3c090d83494e2d804')
                 .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
+                    expect(err).to.be.null;
                     res.should.have.status(404);
                     done();
                 });
