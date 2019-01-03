@@ -111,9 +111,9 @@ exports.doesUserHaveAccess = (jwt, albumId) => new Promise((resolve, reject) => 
             throw err;
         } else if (album) {
             if (album.access.map((acc) => acc.collaborator).includes(userId)) {
-                resolve(true);
+                resolve([true]);
             } else {
-                resolve(false);
+                resolve([false]);
             }
         } else {
             resolve([false, 'Album with such id does not exist']);
