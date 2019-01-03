@@ -24,8 +24,9 @@ const router = express.Router();
 router.route('/albums/:_albumId/mediaItems')
     .post([
         jwtCheck,
+        validator.checkSchema(mediaItemsPolicy.post),
         upload.array('picture'),
-        mediaItemsController.createCb
+        (req, res, next) => mediaItemsController.createCb(req, res, next, validator)
     ]);
 
 router.route('/albums/:_albumId/mediaItems/:_id')

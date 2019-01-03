@@ -34,3 +34,19 @@ exports.delete = {
         errorMessage: 'MediaItem id must be provided'
     }
 };
+
+exports.post = {
+    _albumId: {
+        in: ['params'],
+        errorMessage: 'Album id is invalid',
+        custom: {
+            options: (id, { req }) => ObjectId.isValid(id) && doesUserHaveAccess(req.get('Authorization'), id)
+                .then(([result, message = `You have no access to modify album with id: ${id}`]) => {
+                    if (!result) {
+                        return Promise.reject(new Error(message));
+                    }
+                })
+                .catch((err) => Promise.reject(err))
+        }
+    }
+};
