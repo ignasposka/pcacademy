@@ -6,7 +6,13 @@ exports.getSingle = {
         in: ['params'],
         errorMessage: 'Album id is invalid',
         custom: {
-            options: (id) => ObjectId.isValid(id)
+            options: (id, { req }) => ObjectId.isValid(id) && doesUserHaveAccess(req.get('Authorization'), id, true)
+                .then((result) => {
+                    if (!result) {
+                        return Promise.reject(new Error(`You have no access to modify album with id: ${id}`));
+                    }
+                })
+                .catch((err) => Promise.reject(err))
         }
     },
     _id: {
@@ -21,9 +27,9 @@ exports.delete = {
         errorMessage: 'Album id is invalid',
         custom: {
             options: (id, { req }) => ObjectId.isValid(id) && doesUserHaveAccess(req.get('Authorization'), id)
-                .then(([result, message = `You have no access to modify album with id: ${id}`]) => {
+                .then((result) => {
                     if (!result) {
-                        return Promise.reject(new Error(message));
+                        return Promise.reject(new Error(`You have no access to modify album with id: ${id}`));
                     }
                 })
                 .catch((err) => Promise.reject(err))
@@ -41,9 +47,9 @@ exports.post = {
         errorMessage: 'Album id is invalid',
         custom: {
             options: (id, { req }) => ObjectId.isValid(id) && doesUserHaveAccess(req.get('Authorization'), id)
-                .then(([result, message = `You have no access to modify album with id: ${id}`]) => {
+                .then((result) => {
                     if (!result) {
-                        return Promise.reject(new Error(message));
+                        return Promise.reject(new Error(`You have no access to modify album with id: ${id}`));
                     }
                 })
                 .catch((err) => Promise.reject(err))

@@ -9,6 +9,7 @@ module.exports = (apiUrl) => {
         it('it should return 200 (Created) and pictures\' array in body', (done) => {
             chai.request(apiUrl)
                 .get(`/albums/${process.env.CREATED_ALBUM_ID}/mediaItems/${process.env.CREATED_FILE_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
                     if (res.status !== 200) {
                         console.log(res.body);

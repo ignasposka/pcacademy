@@ -102,7 +102,7 @@ exports.delete = (req, res, next, validator) => {
     }
 };
 
-exports.doesUserHaveAccess = (jwt, albumId) => new Promise((resolve, reject) => {
+exports.doesUserHaveAccess = (jwt, albumId, getMethod) => new Promise((resolve, reject) => {
     const userInfo = jwtDecode(jwt);
     const userId = userInfo.sub;
 
@@ -110,32 +110,15 @@ exports.doesUserHaveAccess = (jwt, albumId) => new Promise((resolve, reject) => 
         if (err) {
             throw err;
         } else if (album) {
-            if (album.access.map((acc) => acc.collaborator).includes(userId)) {
-                resolve([true]);
+            if (getMethod && album.access.map((acc) => acc.collaborator).includes('*')) {
+                resolve(true);
+            } else if (album.access.map((acc) => acc.collaborator).includes(userId)) {
+                resolve(true);
             } else {
-                resolve([false]);
+                resolve(false);
             }
         } else {
-            resolve([false, 'Album with such id does not exist']);
-        }
-    });
-});
-
-exports.doesUserHaveAccessToGet = (jwt, albumId) => new Promise((resolve, reject) => {
-    const userInfo = jwtDecode(jwt);
-    const userId = userInfo.sub;
-
-    Album.findById(albumId, (err, album) => {
-        if (err) {
-            throw err;
-        } else if (album) {
-            if (album.access.map((acc) => acc.collaborator).includes(userId)) {
-                resolve([true]);
-            } else {
-                resolve([false]);
-            }
-        } else {
-            resolve([false, 'Album with such id does not exist']);
+            resolve(true);
         }
     });
 });
