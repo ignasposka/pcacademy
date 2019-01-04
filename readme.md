@@ -7,3 +7,4 @@
 * Check if album is actually being deleted ✔
 * Implement multiple file upload ✔
 * Add authorisation for mediaItems
+* Add access check for albums

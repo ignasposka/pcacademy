@@ -35,9 +35,14 @@ module.exports = (apiUrl) => {
         it('it should return albums', (done) => {
             chai.request(apiUrl)
                 .get('/albums')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
                     expect(err).to.be.null;
+                    if (res.status !== 200) {
+                        console.log(res.body);
+                    }
                     res.should.have.status(200);
+                    res.body.should.be.an('array').with.length.ge(1);
                     res.body.forEach((album) => {
                         album.should.shallowDeepEqual({
                             access: [{

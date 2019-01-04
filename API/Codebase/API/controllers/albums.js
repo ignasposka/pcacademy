@@ -3,8 +3,10 @@ const filter = require('express-validator/filter');
 const jwtDecode = require('jwt-decode');
 
 exports.get = (req, res, next) => {
+    const jwtToken = req.get('Authorization');
+    const { sub: userId } = jwtDecode(jwtToken);
     // eslint-disable-next-line array-callback-return
-    Album.find((err, albums) => {
+    Album.find({ access: [{ collaborator: userId }] }, (err, albums) => {
         if (err) {
             next(err);
         } else {
