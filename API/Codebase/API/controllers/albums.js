@@ -6,7 +6,7 @@ exports.get = (req, res, next) => {
     const jwtToken = req.get('Authorization');
     const { sub: userId } = jwtDecode(jwtToken);
     // eslint-disable-next-line array-callback-return
-    Album.find({ access: [{ collaborator: userId }] }, (err, albums) => {
+    Album.find({ 'access.0.collaborator': userId }, (err, albums) => {
         if (err) {
             next(err);
         } else {

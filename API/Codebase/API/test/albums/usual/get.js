@@ -42,7 +42,7 @@ module.exports = (apiUrl) => {
                         console.log(res.body);
                     }
                     res.should.have.status(200);
-                    res.body.should.be.an('array').with.length.ge(1);
+                    expect(res.body).to.have.length(1);
                     res.body.forEach((album) => {
                         album.should.shallowDeepEqual({
                             access: [{
