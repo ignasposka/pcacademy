@@ -22,4 +22,15 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/GET another user album', () => {
+        it('it should return 403 (Forbidden)', (done) => {
+            chai.request(apiUrl)
+                .get(`/albums/${process.env.ANOTHER_USER_ALBUM_ID}`)
+                .end((err, res) => {
+                    res.should.have.status(403);
+                    done();
+                });
+        });
+    });
 };

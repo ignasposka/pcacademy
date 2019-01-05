@@ -30,6 +30,11 @@ exports.getSingle = (req, res, next, validator) => {
             }
         });
     } else {
+        validationErrors.array().forEach((err) => {
+            if (err.msg.includes('You have no access')) {
+                res.status(403).json({ errors: validationErrors.array() });
+            }
+        });
         res.status(400).json({ errors: validationErrors.array() });
     }
 };
@@ -105,17 +110,20 @@ exports.delete = (req, res, next, validator) => {
 };
 
 exports.doesUserHaveAccess = (jwt, albumId, getMethod) => new Promise((resolve, reject) => {
-    const userInfo = jwtDecode(jwt);
-    const userId = userInfo.sub;
-
     Album.findById(albumId, (err, album) => {
         if (err) {
             throw err;
         } else if (album) {
             if (getMethod && album.access.map((acc) => acc.collaborator).includes('*')) {
                 resolve(true);
-            } else if (album.access.map((acc) => acc.collaborator).includes(userId)) {
-                resolve(true);
+            } else if (jwt) {
+                const userInfo = jwtDecode(jwt);
+                const userId = userInfo.sub;
+                if (album.access.map((acc) => acc.collaborator).includes(userId)) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
             } else {
                 resolve(false);
             }
