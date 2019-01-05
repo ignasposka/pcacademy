@@ -20,7 +20,10 @@ const jwtCheck = jwt({
 const router = express.Router();
 
 router.route('/albums')
-    .get(albumsController.get)
+    .get([
+        jwtCheck,
+        albumsController.get
+    ])
     .post([
         jwtCheck,
         validator.checkSchema(albumPolicy.create),

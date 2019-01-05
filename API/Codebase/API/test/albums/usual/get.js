@@ -13,6 +13,7 @@ module.exports = (apiUrl) => {
         it('it should return created album', (done) => {
             chai.request(apiUrl)
                 .get(`/albums/${process.env.CREATED_ALBUM_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
                 .end((err, res) => {
                     expect(err).to.be.null;
                     if (res.status !== 200) {
