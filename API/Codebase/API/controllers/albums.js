@@ -86,6 +86,11 @@ exports.patch = (req, res, next, validator) => {
             }
         });
     } else {
+        validationErrors.array().forEach((err) => {
+            if (err.msg.includes('You have no access')) {
+                res.status(403).json({ errors: validationErrors.array() });
+            }
+        });
         res.status(400).json({ errors: validationErrors.array() });
     }
 };
@@ -105,6 +110,11 @@ exports.delete = (req, res, next, validator) => {
             }
         });
     } else {
+        validationErrors.array().forEach((err) => {
+            if (err.msg.includes('You have no access')) {
+                res.status(403).json({ errors: validationErrors.array() });
+            }
+        });
         res.status(400).json({ errors: validationErrors.array() });
     }
 };

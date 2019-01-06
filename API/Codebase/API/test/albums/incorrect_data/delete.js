@@ -27,4 +27,17 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/DELETE another user\'s album', () => {
+        it('it should return 403 (Forbidden)', (done) => {
+            chai.request(apiUrl)
+                .delete(`/albums/${process.env.ANOTHER_USER_ALBUM_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    res.should.have.status(403);
+                    done();
+                });
+        });
+    });
 };

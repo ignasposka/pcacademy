@@ -82,4 +82,24 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/PATCH another user album', () => {
+        it('it should return 403 (Forbidden)', (done) => {
+            chai.request(apiUrl)
+                .patch(`/albums/${process.env.ANOTHER_USER_ALBUM_ID}`)
+                .set('content-type', 'application/json')
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
+                .send({
+                    name: 'patched!'
+                })
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    if (res.status !== 403) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(403);
+                    done();
+                });
+        });
+    });
 };
