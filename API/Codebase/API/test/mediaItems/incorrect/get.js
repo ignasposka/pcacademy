@@ -52,4 +52,20 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/GET file from album which is not yours', () => {
+        it('it should return 403 (Forbidden)', (done) => {
+            chai.request(apiUrl)
+                .get(`/albums/${process.env.ANOTHER_USER_ALBUM_ID}/mediaItems/${process.env.CREATED_FILE_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
+                .end((err, res) => {
+                    if (res.status !== 403) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(403);
+                    expect(err).to.be.equals(null);
+                    done();
+                });
+        });
+    });
 };

@@ -44,9 +44,7 @@ chai.use(chaiHtpp);
 loadToken().then(() => {
     describe('Main test', () => {
         before((done) => {
-            AlbumModel.deleteMany({}, (err) => {
-                rimraf('uploads/*', () => done());
-            });
+            rimraf('uploads/*', () => done());
         });
 
         testAlbumsUsual();

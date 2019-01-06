@@ -1,5 +1,5 @@
 ##Test cases to implement:
-* Try get/modify other user's albums
+* Try get/modify other user's albums ✔
 * Try get/modify other user's mediaItems
 * Get public album
 * Get public mediaItems
