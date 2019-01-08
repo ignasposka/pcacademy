@@ -24,19 +24,28 @@ exports.createCb = (req, res, next, validator) => {
     const validationErrors = validator.validationResult(req);
 
     if (validationErrors.isEmpty()) {
-        Album.findByIdAndUpdate(req.params._albumId, {
-            $push: { mediaItems: req.files.map((file) => file.filename) }
-        },
-        (err, result) => {
-            if (err) {
-                next(err);
-            } else if (result) {
-                res.status(201).send({ filenames: req.files.map((file) => file.filename) });
-            } else {
-                res.status(404).send();
+        if (req.files) {
+            Album.findByIdAndUpdate(req.params._albumId, {
+                $push: { mediaItems: req.files.map((file) => file.filename) }
+            },
+            (err, result) => {
+                if (err) {
+                    next(err);
+                } else if (result) {
+                    res.status(201).send({ filenames: req.files.map((file) => file.filename) });
+                } else {
+                    res.status(404).send();
+                }
+            });
+        } else {
+            res.status(400).json({ errors: 'request should contain files named "picture"' });
+        }
+    } else {
+        validationErrors.array().forEach((err) => {
+            if (err.msg.includes('You have no access')) {
+                res.status(403).json({ errors: validationErrors.array() });
             }
         });
-    } else {
         res.status(400).json({ errors: validationErrors.array() });
     }
 };
@@ -74,14 +83,18 @@ exports.delete = (req, res, next, validator) => {
             { $pull: { mediaItems: requestData._id } }, (err, data) => {
                 if (err) {
                     next(err);
-                } else if (data.mediaItems.includes(requestData._id)) {
-                    deleteFile(`uploads/${requestData._id}`)
-                        .then(() => res.status(204).send())
-                        .catch((err) => {
-                            if (err.errno === -4058) {
-                                res.status(204).send();
-                            }
-                        });
+                } else if (data) {
+                    if (data.mediaItems.includes(requestData._id)) {
+                        deleteFile(`uploads/${requestData._id}`)
+                            .then(() => res.status(204).send())
+                            .catch((err) => {
+                                if (err.errno === -4058) {
+                                    res.status(204).send();
+                                }
+                            });
+                    } else {
+                        res.status(404).send();
+                    }
                 } else {
                     res.status(404).send();
                 }

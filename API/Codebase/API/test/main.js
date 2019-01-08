@@ -36,6 +36,8 @@ const testMediaItemsUsual = () => {
 
 const testMediaItemsIncorrect = () => {
     mediaItemsIncorrect.get(apiUrl);
+    mediaItemsIncorrect.post(apiUrl);
+    mediaItemsIncorrect.delete(apiUrl);
 };
 
 chai.should();
