@@ -47,8 +47,7 @@ loadToken().then(() => {
             rimraf('uploads/*', () => {
                 const album = new Album({
                     name: 'public',
-                    access: [{ collaborator: '*', rights: 'read' }],
-                    mediaItems: [process.env.CREATED_FILE_ID]
+                    access: [{ collaborator: '*', rights: 'read' }]
                 });
 
                 album.save((err, createdAlbum) => {
