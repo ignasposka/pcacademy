@@ -1,16 +1,14 @@
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
-const { expect } = require('chai');
 const chaiHtpp = require('chai-http');
-const AlbumModel = require('../models/album');
-const mlog = require('mocha-logger');
 const loadToken = require('./loadToken');
 const albumsUsual = require('./albums/usual');
 const albumsIncorrect = require('./albums/incorrect_data');
 const mediaItemsUsual = require('./mediaItems/usual');
 const mediaItemsIncorrect = require('./mediaItems/incorrect');
 const rimraf = require('rimraf');
+const Album = require('../models/album');
 
 const apiUrl = 'http://localhost:8080';
 require('../index.js');
@@ -46,7 +44,22 @@ chai.use(chaiHtpp);
 loadToken().then(() => {
     describe('Main test', () => {
         before((done) => {
-            rimraf('uploads/*', () => done());
+            rimraf('uploads/*', () => {
+                const album = new Album({
+                    name: 'public',
+                    access: [{ collaborator: '*', rights: 'read' }],
+                    mediaItems: [process.env.CREATED_FILE_ID]
+                });
+
+                album.save((err, createdAlbum) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        process.env.CREATED_PUBLIC_ALBUM_ID = createdAlbum._id;
+                        done();
+                    }
+                });
+            });
         });
 
         testAlbumsUsual();

@@ -69,4 +69,20 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/POST picture to public album without authentification', () => {
+        it('it should return 401 (Unauthorized)', (done) => {
+            chai.request(apiUrl)
+                .post(`/albums/${process.env.CREATED_PUBLIC_ALBUM_ID}/mediaItems`)
+                .attach('picture', 'test/mediaItems/usual/spending_rest_life_in_emacs.jpg', 'spending_rest_life_in_emacs.jpg')
+                .attach('picture', 'test/mediaItems/usual/paypal bugs.png', 'paypal bugs.png')
+                .end((err, res) => {
+                    if (res.status !== 401) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(401);
+                    done();
+                });
+        });
+    });
 };

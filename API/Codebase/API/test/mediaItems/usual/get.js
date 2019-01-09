@@ -3,26 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const { expect } = require('chai');
 chai.use(require('chai-bytes'));
-const Album = require('../../../models/album');
 
 module.exports = (apiUrl) => {
-    before((done) => {
-        const album = new Album({
-            name: 'public',
-            access: [{ collaborator: '*', rights: 'read' }],
-            mediaItems: [process.env.CREATED_FILE_ID]
-        });
-
-        album.save((err, createdAlbum) => {
-            if (err) {
-                console.log(err);
-            } else {
-                process.env.CREATED_PUBLIC_ALBUM_ID = createdAlbum._id;
-                done();
-            }
-        });
-    });
-
     describe('/GET single picture', () => {
         it('it should return 200 (Created) and pictures\' array in body', (done) => {
             chai.request(apiUrl)
