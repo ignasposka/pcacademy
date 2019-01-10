@@ -1,4 +1,5 @@
 const chai = require('chai');
+const Album = require('../../../models/album');
 
 module.exports = (apiUrl) => {
     describe('/POST picture', () => {
@@ -15,8 +16,20 @@ module.exports = (apiUrl) => {
                     res.should.have.status(201);
                     res.body.should.contain.key('filenames');
                     [process.env.CREATED_FILE_ID] = res.body.filenames;
-                    done();
+                    updatePublicAlbum(done);
                 });
         });
     });
 };
+
+function updatePublicAlbum(done) {
+    Album.findByIdAndUpdate(process.env.CREATED_PUBLIC_ALBUM_ID, {
+        $push: { mediaItems: process.env.CREATED_FILE_ID }
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            done();
+        }
+    });
+}

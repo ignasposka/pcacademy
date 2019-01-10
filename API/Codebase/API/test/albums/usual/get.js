@@ -55,4 +55,49 @@ module.exports = (apiUrl) => {
                 });
         });
     });
+
+    describe('/GET single public album with authentification', () => {
+        it('it should return created album', (done) => {
+            chai.request(apiUrl)
+                .get(`/albums/${process.env.CREATED_PUBLIC_ALBUM_ID}`)
+                .set('Authorization', `Bearer ${process.env.ACCESS_TOKEN}`)
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    if (res.status !== 200) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(200);
+                    expect(res.body).to.have.property('_id').to.be.equal(process.env.CREATED_PUBLIC_ALBUM_ID);
+                    expect(res.body).to.have.property('name').to.be.equal('public');
+                    res.body.should.shallowDeepEqual({
+                        access: [{
+                            collaborator: '*'
+                        }]
+                    });
+                    done();
+                });
+        });
+    });
+
+    describe('/GET single public album without authentification', () => {
+        it('it should return created album', (done) => {
+            chai.request(apiUrl)
+                .get(`/albums/${process.env.CREATED_PUBLIC_ALBUM_ID}`)
+                .end((err, res) => {
+                    expect(err).to.be.null;
+                    if (res.status !== 200) {
+                        console.log(res.body);
+                    }
+                    res.should.have.status(200);
+                    expect(res.body).to.have.property('_id').to.be.equal(process.env.CREATED_PUBLIC_ALBUM_ID);
+                    expect(res.body).to.have.property('name').to.be.equal('public');
+                    res.body.should.shallowDeepEqual({
+                        access: [{
+                            collaborator: '*'
+                        }]
+                    });
+                    done();
+                });
+        });
+    });
 };
