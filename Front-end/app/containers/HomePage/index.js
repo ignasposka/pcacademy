@@ -10,16 +10,16 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import PropTypes from 'prop-types';
+import TopBar from '../../components/TopBar';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-    );
+    return <TopBar title={this.props.title}/>;
   }
 }
+
+HomePage.propTypes = {
+  title: PropTypes.string
+};
