@@ -7,6 +7,7 @@ const albumsUsual = require('./albums/usual');
 const albumsIncorrect = require('./albums/incorrect_data');
 const mediaItemsUsual = require('./mediaItems/usual');
 const mediaItemsIncorrect = require('./mediaItems/incorrect');
+const randomPhoto = require('./randomPhoto/get');
 const rimraf = require('rimraf');
 const Album = require('../models/album');
 
@@ -38,6 +39,10 @@ const testMediaItemsIncorrect = () => {
     mediaItemsIncorrect.delete(apiUrl);
 };
 
+const testRandomPhoto = () => {
+    randomPhoto(apiUrl);
+};
+
 chai.should();
 chai.use(chaiHtpp);
 
@@ -66,5 +71,6 @@ loadToken().then(() => {
         testMediaItemsIncorrect();
         testMediaItemsUsual();
         albumsUsual.delete(apiUrl);
+        testRandomPhoto();
     });
 });
