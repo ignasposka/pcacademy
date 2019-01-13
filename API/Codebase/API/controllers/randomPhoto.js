@@ -7,7 +7,7 @@ exports.get = (req, res, next) => {
     })
         .then((response) => response.json())
         .then((data) => {
-            fetch(data.photos[0].src.large).then(({ body }) => {
+            fetch(data.photos[0].src.large2x).then(({ body }) => {
                 body.pipe(res);
             });
         })
