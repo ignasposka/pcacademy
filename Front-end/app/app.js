@@ -32,6 +32,7 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+import 'typeface-roboto';
 
 // Create redux store with history
 const initialState = {};

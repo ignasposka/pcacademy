@@ -12,11 +12,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TopBar from '../../components/TopBar';
+import WelcomeText from '../../components/WelcomeText';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
-    return <TopBar title={this.props.title}/>;
+    return [
+      <TopBar title={this.props.title}/>,
+      <WelcomeText />
+    ];
   }
 }
 
