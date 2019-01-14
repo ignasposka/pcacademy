@@ -1,6 +1,6 @@
 import { SET_DATA } from './constants';
 
-export function setData(list) {
+export default function setData(list) {
   return {
     type: SET_DATA,
     list,
