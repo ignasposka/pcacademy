@@ -11,6 +11,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './style.css';
 import TopBar from '../../components/TopBar';
 import WelcomeText from '../../components/WelcomeText';
 
@@ -19,7 +20,7 @@ export default class HomePage extends React.PureComponent {
   render() {
     return [
       <TopBar title={this.props.title}/>,
-      <WelcomeText />
+      <WelcomeText className={styles.welcomeText}/>
     ];
   }
 }
