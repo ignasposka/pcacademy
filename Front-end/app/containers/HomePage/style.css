@@ -1,3 +1,6 @@
 .welcomeText{
-    color: red;
+    padding-top: 30vh;
+    color: bisque;
+    mix-blend-mode: difference;
+    font-weight: 400;
 }

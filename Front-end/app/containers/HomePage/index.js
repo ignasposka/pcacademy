@@ -20,7 +20,9 @@ export default class HomePage extends React.PureComponent {
   render() {
     return [
       <TopBar title={this.props.title}/>,
-      <WelcomeText className={styles.welcomeText}/>
+      <div className={styles.welcomeText}>
+        <WelcomeText/>
+      </div>
     ];
   }
 }
