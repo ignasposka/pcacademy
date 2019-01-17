@@ -17,12 +17,12 @@ import GlobalStyle from '../../global-styles';
 
 export default function App() {
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path="/" component={() => <HomePage title='Space Saver'/>} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
-    </div>
+    </>
   );
 }

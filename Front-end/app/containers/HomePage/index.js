@@ -13,17 +13,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.css';
 import TopBar from '../../components/TopBar';
-import WelcomeText from '../../components/WelcomeText';
+import PublicHomePage from '../../components/PublicHomePage/PublicHomePage';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
+  state = {isLoggedIn: false};
+
   render() {
-    return [
-      <TopBar title={this.props.title}/>,
-      <div className={styles.welcomeText}>
-        <WelcomeText/>
-      </div>
-    ];
+    return(
+      <>
+        <TopBar title={this.props.title}/>
+        {
+          !this.state.isLoggedIn &&
+        <div className={styles.publicHomePage}>
+          <PublicHomePage/>
+        </div>
+        }
+      </>
+    );
   }
 }
 

@@ -3,9 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   html,
   body {
+    height: 100vh;
     width: 100%;
-    background: url(http://localhost:8080/randomPhoto);
-    background-size: cover;
   }
 
   body {
@@ -19,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   #app {
     min-height: 100%;
     min-width: 100%;
+    display: flex;
   }
 
   p,
