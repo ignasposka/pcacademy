@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     min-width: 100%;
     display: flex;
+    flex-direction: column;
   }
 
   p,
