@@ -9,12 +9,13 @@
 
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
-import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import PropTypes from 'prop-types';
 import GlobalStyle from '../../global-styles';
+import TopBar from '../../components/TopBar';
+import PublicHomePage from '../../components/PublicHomePage/PublicHomePage';
+import styles from './style.css';
 
 export default class App extends Component {
 
@@ -32,7 +33,18 @@ export default class App extends Component {
     return (
     <>
       <Switch>
-        <Route exact path="/" component={() => <HomePage title={this.state.title}/>} />
+        <Route
+          exact path="/" component={() => 
+            <>
+            <TopBar title={this.state.title}/>
+            {
+              !this.props.auth.isAuthenticated() &&
+        <div className={styles.publicHomePage}>
+          <PublicHomePage/>
+        </div>
+            }
+            </>
+          } />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
