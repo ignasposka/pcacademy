@@ -33,6 +33,7 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 import 'typeface-roboto';
+import Auth from '../Auth/Auth';
 
 // Create redux store with history
 const initialState = {};
@@ -44,7 +45,7 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <App auth={new Auth()}/>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
