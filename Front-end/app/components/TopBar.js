@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Auth from '../../Auth/Auth'
 
 const styles = {
   grow: {
@@ -18,27 +19,38 @@ const styles = {
   }
 };
 
-function TopBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            {props.title}
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class TopBar extends Component {
+  constructor(props){
+    super(props);
+    this.classes = props.classes;
+  }
+
+  login = () => {
+    const auth = new Auth();
+    auth.login();
+  }
+  
+  render(){
+    return (
+      <div className={this.classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              className={this.classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={this.classes.grow}>
+              {this.props.title}
+            </Typography>
+            <Button color="inherit" onClick={this.login}>Login</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 TopBar.propTypes = {
