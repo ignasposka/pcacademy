@@ -23,7 +23,7 @@ export default class Auth {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
         } else if (err) {
-          history.replace('/home');
+          history.replace('/');
           console.log(err);
           alert(`Error: ${err.error}. Check the console for further details.`);
         }
@@ -33,7 +33,7 @@ export default class Auth {
     getAccessToken() {
       return this.accessToken;
     }
-    
+
     getIdToken() {
       return this.idToken;
     }
@@ -41,13 +41,13 @@ export default class Auth {
     setSession(authResult) {
       // Set isLoggedIn flag in localStorage
       localStorage.setItem('isLoggedIn', 'true');
-    
+
       // Set the time that the access token will expire at
       const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
       this.accessToken = authResult.accessToken;
       this.idToken = authResult.idToken;
       this.expiresAt = expiresAt;
-    
+
       // navigate to the home route
       history.replace('/');
     }
@@ -69,30 +69,30 @@ export default class Auth {
       this.accessToken = null;
       this.idToken = null;
       this.expiresAt = 0;
-    
+
       // Remove isLoggedIn flag from localStorage
       localStorage.removeItem('isLoggedIn');
-    
+
       // navigate to the home route
       history.replace('/');
     }
 
-      
+
     auth0 = new auth0.WebAuth({
       domain: 'ignasposka.eu.auth0.com',
       clientID: '3lI4pT2i3ZqOgTgm0iSGl6upS93k7A3c',
-      redirectUri: 'http://localhost:3000',
+      redirectUri: 'http://localhost:3000/loginCallback',
       responseType: 'token id_token',
       scope: 'openid'
     });
-    
+
     isAuthenticated() {
       // Check whether the current time is past the
       // access token's expiry time
       const { expiresAt } = this;
       return new Date().getTime() < expiresAt;
     }
-    
+
 
     login() {
       this.auth0.authorize();

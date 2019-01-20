@@ -16,16 +16,24 @@ import GlobalStyle from '../../global-styles';
 import TopBar from '../../components/TopBar';
 import PublicHomePage from '../../components/PublicHomePage/PublicHomePage';
 import styles from './style.css';
+import LoginCallback from '../../components/LoginCallback';
 
 export default class App extends Component {
 
-  state = {title: 'Space Saver'}
-
-  componentDidMount(){
+  constructor(props){
+    super(props);
     const { renewSession } = this.props.auth;
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
       renewSession();
+    }
+  }
+
+  state = {title: 'Space Saver'}
+
+  handleAuthentication = (nextState) => {
+    if (/access_token|id_token|error/.test(nextState.location.hash)) {
+      this.props.auth.handleAuthentication();
     }
   }
 
@@ -34,7 +42,7 @@ export default class App extends Component {
     <>
       <Switch>
         <Route
-          exact path="/" component={() => 
+          exact path="/" component={() =>
             <>
             <TopBar title={this.state.title}/>
             {
@@ -45,6 +53,11 @@ export default class App extends Component {
             }
             </>
           } />
+        <Route
+          path="/loginCallback" render={(props) => {
+            this.handleAuthentication(props);
+            return <LoginCallback {...props} />
+          }}/>
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
