@@ -15,6 +15,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import LuckyBastard from '../LuckyBastard';
+import ListPage from '../ListPage';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/luckyBastard" component={LuckyBastard} />
+        <Route exact path="/home" component={ListPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

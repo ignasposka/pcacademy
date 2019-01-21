@@ -20,8 +20,7 @@ import LoginCallback from '../../components/LoginCallback';
 
 export default class App extends Component {
 
-  constructor(props){
-    super(props);
+  componentDidMount(){
     const { renewSession } = this.props.auth;
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
