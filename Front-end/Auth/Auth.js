@@ -19,15 +19,14 @@ export default class Auth {
     }
 
     handleAuthentication() {
-      this.auth0.parseHash((err, authResult) => {
-        if (authResult && authResult.accessToken && authResult.idToken) {
-          this.setSession(authResult);
-        } else if (err) {
-          history.replace('/');
-          console.log(err);
-          alert(`Error: ${err.error}. Check the console for further details.`);
-        }
-      });
+      const hashParts = window.location.hash.split('&');
+      if(hashParts.length > 0 && hashParts[0]){
+        const authResult = {};
+        authResult.accessToken = hashParts[0].replace('#access_token=', '');
+        authResult.expiresAt = hashParts[1].replace('expires_in=', '');
+        authResult.idToken = hashParts[4].replace('id_token=', '');
+        this.setSession(authResult);
+      }
     }
 
     getAccessToken() {
