@@ -51,7 +51,7 @@ export default class Auth {
       history.replace('/');
     }
 
-    renewSession() {
+    renewSession(cb = () => {}) {
       this.auth0.checkSession({}, (err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
@@ -60,6 +60,7 @@ export default class Auth {
           console.log(err);
           alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
         }
+        cb();
       });
     }
 
@@ -86,10 +87,13 @@ export default class Auth {
     });
 
     isAuthenticated() {
+
       // Check whether the current time is past the
       // access token's expiry time
-      const { expiresAt } = this;
-      return new Date().getTime() < expiresAt;
+      this.renewSession(() => {
+        const { expiresAt } = this;
+        return new Date().getTime() < expiresAt;
+      })
     }
 
 
