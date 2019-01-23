@@ -20,11 +20,13 @@ import LoginCallback from '../../components/LoginCallback';
 
 export default class App extends Component {
 
+  state = {isAuthenticated: false};
+
   componentDidMount(){
     const { renewSession } = this.props.auth;
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
-      renewSession();
+      renewSession((sucess) => this.setState({isAuthenticated: sucess}));
     }
   }
 
@@ -45,7 +47,7 @@ export default class App extends Component {
             <>
             <TopBar title={this.state.title}/>
             {
-              !this.props.auth.isAuthenticated() &&
+              !this.state.isAuthenticated &&
         <div className={styles.publicHomePage}>
           <PublicHomePage/>
         </div>
