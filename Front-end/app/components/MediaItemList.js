@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
@@ -13,16 +13,25 @@ const styles = theme => ({
   }
 });
 
-function MediaItemList(props) {
-  const { classes } = props;
-  return (
-    <div>
-      <Fab variant="extended" aria-label="Add" className={classes.fab}>
-        <AddIcon className={classes.extendedIcon} />
+
+
+class MediaItemList extends Component {
+
+  componentDidMount(){
+
+  }
+
+  render(){
+    const { classes } = this.props;
+    return (
+      <div>
+        <Fab variant="extended" aria-label="Add" className={classes.fab}>
+          <AddIcon className={classes.extendedIcon} />
         Add item
-      </Fab>
-    </div>
-  );
+        </Fab>
+      </div>
+    );
+  }
 }
 
 MediaItemList.propTypes = {
