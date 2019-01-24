@@ -17,6 +17,7 @@ import TopBar from '../../components/TopBar';
 import PublicHomePage from '../../components/PublicHomePage/PublicHomePage';
 import styles from './style.css';
 import LoginCallback from '../../components/LoginCallback';
+import MediaItemList from '../../components/MediaItemList';
 
 export default class App extends Component {
 
@@ -47,10 +48,11 @@ export default class App extends Component {
             <>
             <TopBar title={this.state.title}/>
             {
-              !this.state.isAuthenticated &&
-        <div className={styles.publicHomePage}>
-          <PublicHomePage/>
-        </div>
+              !this.state.isAuthenticated ?
+                <div className={styles.publicHomePage}>
+                  <PublicHomePage/>
+                </div> :
+                <MediaItemList/>
             }
             </>
           } />
