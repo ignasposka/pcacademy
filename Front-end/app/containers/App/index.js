@@ -17,7 +17,7 @@ import TopBar from '../../components/TopBar';
 import PublicHomePage from '../../components/PublicHomePage/PublicHomePage';
 import styles from './style.css';
 import LoginCallback from '../../components/LoginCallback';
-import MediaItemList from '../../components/MediaItemList';
+import MediaItemList from '../../components/MediaItemList/MediaItemList';
 
 export default class App extends Component {
 

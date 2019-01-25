@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import externalStyles from './styles.css';
 
 const styles = theme => ({
   fab: {
@@ -18,13 +19,13 @@ const styles = theme => ({
 class MediaItemList extends Component {
 
   componentDidMount(){
-
+    // window.addEventListener()
   }
 
   render(){
     const { classes } = this.props;
     return (
-      <div>
+      <div className={externalStyles.mediaItemList}>
         <Fab variant="extended" aria-label="Add" className={classes.fab}>
           <AddIcon className={classes.extendedIcon} />
         Add item
