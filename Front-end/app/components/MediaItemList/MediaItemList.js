@@ -19,13 +19,39 @@ const styles = theme => ({
 class MediaItemList extends Component {
 
   componentDidMount(){
-    // window.addEventListener()
+  }
+
+  preventDefault(e){
+    e.preventDefault();
+    return false;
+  }
+
+  onDrop(e){
+    e.preventDefault();
+
+    const dt = e.dataTransfer;
+    const {files} = dt;
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.addEventListener('loadend', () => {
+        console.table(file)
+      })
+    });
+
+    return false;
   }
 
   render(){
     const { classes } = this.props;
     return (
-      <div className={externalStyles.mediaItemList}>
+      <div
+        className={externalStyles.mediaItemList}
+        onDragOver={this.preventDefault}
+        onDragEnter={this.preventDefault}
+        onDrop={this.onDrop}
+      >
         <Fab variant="extended" aria-label="Add" className={classes.fab}>
           <AddIcon className={classes.extendedIcon} />
         Add item
