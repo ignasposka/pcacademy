@@ -11,3 +11,4 @@
 * Implement multiple file upload ✔
 * Add authorisation for mediaItems ✔
 * Add access check for albums ✔
+* Add endpoint to get all mediaItems ordered by date descending

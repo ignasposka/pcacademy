@@ -6,6 +6,7 @@ const handleError = require('./handleError');
 const albumsRouter = require('./routes/albums');
 const mediaItemsRouter = require('./routes/mediaItems');
 const randomPhotoRouter = require('./routes/randomPhoto');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -20,6 +21,12 @@ connectToDb((err) => {
 function initialize() {
     setRootDir();
     const app = express();
+
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+        allowedHeaders: ['Authorization', 'Content-Type']
+    }));
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import externalStyles from './styles.css';
+import { getMediaItems }  from '../../../api/mediaItems';
 
 const styles = theme => ({
   fab: {
@@ -14,11 +15,10 @@ const styles = theme => ({
   }
 });
 
-
-
 class MediaItemList extends Component {
 
   componentDidMount(){
+    getMediaItems();
   }
 
   preventDefault(e){
