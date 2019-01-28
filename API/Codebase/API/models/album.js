@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const AlbumSchema = new Schema({
     name: { type: String, required: true, max: 50 },
-    mediaItems: { type: [String] },
+    mediaItems: { type: [{ name: String, date: { type: Date, default: Date.now } }] },
     access: {
         type: [{
             collaborator: String,

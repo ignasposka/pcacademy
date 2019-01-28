@@ -4,6 +4,7 @@ const mime = require('mime');
 const Album = require('../models/album');
 const filter = require('express-validator/filter');
 const fs = require('fs');
+const jwtDecode = require('jwt-decode');
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
@@ -26,7 +27,9 @@ exports.createCb = (req, res, next, validator) => {
     if (validationErrors.isEmpty()) {
         if (req.files) {
             Album.findByIdAndUpdate(req.params._albumId, {
-                $push: { mediaItems: req.files.map((file) => file.filename) }
+                $push: {
+                    mediaItems: req.files.map((file) => ({ name: file.filename, date: Date.now }))
+                }
             },
             (err, result) => {
                 if (err) {
@@ -80,7 +83,7 @@ exports.delete = (req, res, next, validator) => {
     if (validationErrors.isEmpty()) {
         const requestData = filter.matchedData(req);
         Album.findByIdAndUpdate(requestData._albumId,
-            { $pull: { mediaItems: requestData._id } }, (err, data) => {
+            { $pull: { mediaItems: { name: requestData._id } } }, (err, data) => {
                 if (err) {
                     next(err);
                 } else if (data) {
@@ -107,6 +110,19 @@ exports.delete = (req, res, next, validator) => {
         });
         res.status(400).json({ errors: validationErrors.array() });
     }
+};
+
+exports.getAll = (req, res, next) => {
+    const jwtToken = req.get('Authorization');
+    const { sub: userId } = jwtDecode(jwtToken);
+    // eslint-disable-next-line array-callback-return
+    Album.find({ 'access.0.collaborator': userId }, (err, albums) => {
+        if (err) {
+            next(err);
+        } else {
+            res.status(200).send(albums);
+        }
+    });
 };
 
 function deleteFile(path) {
