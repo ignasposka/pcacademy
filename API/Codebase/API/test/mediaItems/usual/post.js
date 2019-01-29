@@ -24,7 +24,7 @@ module.exports = (apiUrl) => {
 
 function updatePublicAlbum(done) {
     Album.findByIdAndUpdate(process.env.CREATED_PUBLIC_ALBUM_ID, {
-        $push: { mediaItems: process.env.CREATED_FILE_ID }
+        $push: { mediaItems: { name: process.env.CREATED_FILE_ID, date: Date.now() } }
     }, (err, data) => {
         if (err) {
             console.log(err);

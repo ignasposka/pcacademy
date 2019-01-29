@@ -28,7 +28,7 @@ exports.createCb = (req, res, next, validator) => {
         if (req.files) {
             Album.findByIdAndUpdate(req.params._albumId, {
                 $push: {
-                    mediaItems: req.files.map((file) => ({ name: file.filename, date: Date.now }))
+                    mediaItems: req.files.map((file) => ({ name: file.filename, date: Date.now() }))
                 }
             },
             (err, result) => {
@@ -61,7 +61,9 @@ exports.getSingle = (req, res, next, validator) => {
         Album.findById(requestData._albumId, (err, album) => {
             if (err) {
                 next(err);
-            } else if (album && album.mediaItems.indexOf(requestData._id) > -1) {
+            } else if (album && album.mediaItems.some(
+                (mediaItem) => mediaItem.name === requestData._id
+            )) {
                 res.sendFile(`${process.env.ROOT_DIR}/uploads/${requestData._id}`);
             } else {
                 res.status(404).send();
@@ -87,7 +89,9 @@ exports.delete = (req, res, next, validator) => {
                 if (err) {
                     next(err);
                 } else if (data) {
-                    if (data.mediaItems.includes(requestData._id)) {
+                    if (data.mediaItems.some(
+                        (mediaItem) => mediaItem.name === requestData._id
+                    )) {
                         deleteFile(`uploads/${requestData._id}`)
                             .then(() => res.status(204).send())
                             .catch((err) => {
