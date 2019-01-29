@@ -28,7 +28,7 @@ exports.createCb = (req, res, next, validator) => {
         if (req.files) {
             Album.findByIdAndUpdate(req.params._albumId, {
                 $push: {
-                    mediaItems: req.files.map((file) => ({ name: file.filename, date: Date.now() }))
+                    mediaItems: req.files.map((file) => ({ name: file.filename }))
                 }
             },
             (err, result) => {
